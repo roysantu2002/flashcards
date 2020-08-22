@@ -5,6 +5,7 @@ import { purple, white } from "../utils/colors";
 import Welcome from "../components/Welcome";
 import { FontAwesome } from "@expo/vector-icons";
 
+import { createStackNavigator } from "react-navigation-stack"
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createAppContainer } from "react-navigation";
 
