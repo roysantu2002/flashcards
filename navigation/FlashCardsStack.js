@@ -2,6 +2,8 @@ import React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from "react-navigation";
 import Welcome from "../components/Welcome"
+
+import Test from "../components/Test"
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import AddDeck from '../screens/AddDeck'
 import { CATEGORIES } from '../data/dummy-data';
@@ -15,11 +17,11 @@ import { CATEGORIES } from '../data/dummy-data';
 // };
 
 const FlashCardsStack = createStackNavigator({
-  Categories: Welcome,
-  CategoryMeals: {
-    screen: Welcome
+  Decks: Welcome,
+  Deck: {
+    screen: Test
   },
-  MealDetail: Welcome
+  // MealDetail: Welcome
 });
 
 export default createAppContainer(FlashCardsStack);

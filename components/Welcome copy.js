@@ -16,10 +16,9 @@ import Colors from '../constants/Colors';
 const Welcome = props => {
   const renderGridItem = itemData => {
     return (
-      <DeckGrids
-        title={itemData.item.title}
-        color={itemData.item.color}
-        onSelect={() => {
+      <TouchableOpacity
+        style={styles.gridItem}
+        onPress={() => {
           props.navigation.navigate({
             routeName: 'Deck',
             params: {
@@ -27,25 +26,12 @@ const Welcome = props => {
             }
           });
         }}
-      />
+      >
+        <View>
+          <Text>{itemData.item.title}</Text>
+        </View>
+      </TouchableOpacity>
     );
-
-      // <TouchableOpacity
-      //   style={styles.gridItem}
-      //   onPress={() => {
-      //     props.navigation.navigate({
-      //       routeName: 'Deck',
-      //       params: {
-      //         categoryId: itemData.item.id
-      //       }
-      //     });
-      //   }}
-      // >
-      //   <View>
-      //     <Text>{itemData.item.title}</Text>
-      //   </View>
-      // </TouchableOpacity>
-    // );
   };
 
   return (

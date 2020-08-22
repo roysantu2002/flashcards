@@ -4,7 +4,7 @@ import { View, Text, Button, StyleSheet, Platform } from 'react-native';
 import { CATEGORIES } from '../data/dummy-data';
 import Colors from '../constants/Colors';
 
-const Test = props => {
+const DecksDetails = props => {
   const catId = props.navigation.getParam('categoryId');
 
   const selectedCategory = CATEGORIES.find(cat => cat.id === catId);
@@ -31,7 +31,7 @@ const Test = props => {
   );
 };
 
-Test.navigationOptions = navigationData => {
+DecksDetails.navigationOptions = navigationData => {
   const catId = navigationData.navigation.getParam('categoryId');
 
   const selectedCategory = CATEGORIES.find(cat => cat.id === catId);
@@ -53,4 +53,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Test;
+export default DecksDetails;
