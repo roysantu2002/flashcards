@@ -9,9 +9,11 @@ import { createStackNavigator } from "react-navigation-stack"
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createAppContainer } from "react-navigation";
 
+import FlashCardsStack from "./FlashCardsStack"
+
 const TabNavigator = createBottomTabNavigator({
     Add: {
-      screen: Welcome,
+      screen: FlashCardsStack,
       navigationOptions: {
         tabBarLabel: 'Decks',
         tabBarIcon: ({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />
