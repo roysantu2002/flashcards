@@ -2,7 +2,7 @@ import React from 'react';
 import { Platform, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { purple, white, bgBlue } from "../utils/colors";
-import Welcome from "../components/Welcome";
+import AddDeck from "../components/AddDeck";
 import { FontAwesome } from "@expo/vector-icons";
 
 import { createStackNavigator } from "react-navigation-stack"
@@ -20,7 +20,7 @@ const TabNavigator = createBottomTabNavigator({
       }
     },
     AddDeck: {
-      screen: FlashCardsStack,
+      screen: AddDeck,
       navigationOptions: {
         tabBarLabel: 'Add Deck',
         tabBarIcon: ({ tintColor }) => <FontAwesome name="plus-square" size={30} color={tintColor} />
@@ -32,10 +32,10 @@ const TabNavigator = createBottomTabNavigator({
       header: null
     },
     tabBarOptions: {
-      activeTintColor: Platform.OS === 'ios' ? bgBlue : white,
+      activeTintColor: Platform.OS === "android" ? "#FB005B" : white,
       style: {
         height: 56,
-        backgroundColor: Platform.OS === 'ios' ? '#FAFAFA' : bgBlue,
+        backgroundColor: Platform.OS === 'ios' ? '#FB005B' : '#FB005B',
         // fontFamily: robotoRegular,
         shadowColor: 'rgba(0,0,0,0.24)',
         shadowOffset: {

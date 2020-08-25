@@ -7,17 +7,54 @@ import Colors from "../constants/Colors";
 
 // const Test = props => {
 class Test extends Component {
+
+  // state = { selectedCategory: []};
+
+  // title = this.state.selectedCategory.title
+
+  static navigationOptions = ({navigation}) => ({
+
+        title: navigation.getParam("categoryId"),
+        headerStyle: {
+          backgroundColor: Platform.OS === "android" ? "#FB005B" : "",
+        },
+        headerTintColor: Platform.OS === "android" ? "" : "#FB005B",
+  })
+
+  componentDidMount() {
+    
+    const {navigation} = this.props
+    const CATEGORIES  = this.props
+    const catId = navigation.getParam("categoryId")
+    // const {selectedCategory} = CATEGORIES.find((cat) => cat.id === catId)
+    // console.log(selectedCategory.title)
+    //  this.setState({
+    //   selectedCategory
+    // });
+
+  }
+
+  componentDidUpdate(prevProps) {
+
+    this.navigation.setParams({
+      myTitle: navigation.getParam("categoryId")
+     })
+
+    const {navigation} = this.props
+    const CATEGORIES  = this.props
+    // const catId = navigation.getParam("categoryId")
+    // const {CATEGORIES}  = this.props
+    // const {selectedCategory} = CATEGORIES.find((cat) => cat.id === catId)
+
+    // console.log("did: "+selectedCategory)
+  }
+
   render() {
-    const { CATEGORIES } = this.props;
-
-    const catId = this.props.navigation.getParam("categoryId");
-
-    const selectedCategory = CATEGORIES.find((cat) => cat.id === catId);
 
     return (
       <View style={styles.screen}>
         <Text>The Category Meal Screen!</Text>
-        <Text>{selectedCategory.title}</Text>
+        {/* <Text>{this.state.selectedCategory.title}</Text> */}
         <Button
           title="Go to Details"
           onPress={() => {
@@ -35,22 +72,6 @@ class Test extends Component {
       </View>
     );
   }
-
-
-navigationOptions = (navigationData) => {
-  const catId = navigationData.navigation.getParam("categoryId");
-
-  const selectedCategory = CATEGORIES.find((cat) => cat.id === catId);
-
-  return {
-    headerTitle: selectedCategory.title,
-    headerStyle: {
-      backgroundColor: Platform.OS === "android" ? Colors.primaryColor : "",
-    },
-    headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor,
-  };
-};
-
 }
 
 const styles = StyleSheet.create({
@@ -62,6 +83,7 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(decks) {
+  // const catId = navigation.getParam("categoryId");
   const CATEGORIES = Object.keys(decks)
     .map((key) => decks[key])
     .sort((a, b) => b.timestamp - a.timestamp);

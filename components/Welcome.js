@@ -17,11 +17,29 @@ import Colors from "../constants/Colors";
 // const Welcome = props => {
 
 class Welcome extends Component {
+
+  state = { itemData: [] };
+  
+
+  async componentDidMount() {
+    const { CATEGORIES } = this.props;
+
+    this.setState({
+      itemData: CATEGORIES
+    });
+
+    // console.print(this.state.itemData)
+  }
+
   renderGridItem = (itemData) => {
+
+    // const itemData = this.state.itemData
+    // // const categoryId = itemData.item.id
     return (
       <DeckGrids
         title={itemData.item.title}
-        color={itemData.item.created}
+        created={itemData.item.created}
+        flashcards={itemData.item.questions.length}
         onSelect={() => {
           this.props.navigation.navigate({
             routeName: "Deck",
@@ -51,9 +69,11 @@ class Welcome extends Component {
     // );
   };
 
+
+
   render() {
     const { CATEGORIES } = this.props;
-    // console.log(decksArray.map(deck => (deck.id )))
+    console.log(CATEGORIES)
 
     return (
       <FlatList
@@ -80,13 +100,7 @@ class Welcome extends Component {
 //   };
 // };
 
-Welcome.navigationOptions = {
-  headerTitle: "Decks",
-  headerStyle: {
-    backgroundColor: Platform.OS === "android" ? Colors.primaryColor : "",
-  },
-  headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor,
-};
+
 
 const styles = StyleSheet.create({
   screen: {
