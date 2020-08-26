@@ -3,7 +3,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from "react-navigation";
 import Welcome from "../components/Welcome"
 
-import Test from "../components/Test"
+import Deck from "../components/Deck"
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import AddDeck from '../screens/AddDeck'
 import { CATEGORIES } from '../data/dummy-data';
@@ -19,7 +19,7 @@ import { CATEGORIES } from '../data/dummy-data';
 const FlashCardsStack = createStackNavigator({
   Decks: Welcome,
   Deck: {
-    screen: Test
+    screen: Deck
   },
   // MealDetail: Welcome
 });

@@ -1,17 +1,21 @@
 import { StyleSheet } from 'react-native';
-import { bgBlue, textColor, textRed, white } from './colors';
+import { bgDarkPink, textColor, textRed, white } from './colors';
 import { robotoMedium, robotoRegular } from './fonts';
 
 const globalStyles = StyleSheet.create({
   viewContainer: {
+    marginTop: "20%",
     marginLeft: 16,
-    marginRight: 16
+    marginRight: 16,
+    
   },
   title: {
     marginTop: 16,
     fontSize: 40,
     fontFamily: robotoMedium,
-    color: textColor
+    color: textColor,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   btnPrimary: {
     justifyContent: 'center',
@@ -19,14 +23,14 @@ const globalStyles = StyleSheet.create({
     marginTop: 32,
     height: 50,
     borderRadius: 10,
-    backgroundColor: bgBlue
+    backgroundColor: bgDarkPink
   },
   btnSecondary: {
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 32,
     height: 50,
-    borderColor: bgBlue,
+    borderColor: bgDarkPink,
     borderWidth: 1,
     borderRadius: 10
   },
@@ -37,7 +41,7 @@ const globalStyles = StyleSheet.create({
     textTransform: 'uppercase'
   },
   btnSecondaryText: {
-    color: bgBlue,
+    color: bgDarkPink,
     fontSize: 14,
     fontFamily: robotoMedium,
     textTransform: 'uppercase'

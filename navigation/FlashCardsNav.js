@@ -32,10 +32,11 @@ const TabNavigator = createBottomTabNavigator({
       header: null
     },
     tabBarOptions: {
-      activeTintColor: Platform.OS === "android" ? "#FB005B" : white,
+      // activeTintColor: white,
+      activeTintColor: Platform.OS === "android" ? white : '#FB005B',
       style: {
         height: 56,
-        backgroundColor: Platform.OS === 'ios' ? '#FB005B' : '#FB005B',
+        backgroundColor: Platform.OS === 'android' ? '#FB005B' : white,
         // fontFamily: robotoRegular,
         shadowColor: 'rgba(0,0,0,0.24)',
         shadowOffset: {

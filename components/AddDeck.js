@@ -65,9 +65,9 @@ class AddDeck extends Component {
 
         <View style={globalStyles.viewContainer}>
           <Text style={globalStyles.title}>Add Deck</Text>
-          <Text style={styles.tagline}>Create a new deck of flashcards</Text>
+          <Text style={styles.tagline}>Create a flashcards deck</Text>
 
-          <Text style={styles.label}>Title</Text>
+          <Text style={styles.label}>Deck Title</Text>
           <TextInput value={this.state.title} onChangeText={this.onTitleChange} style={globalStyles.textInput} />
 
 

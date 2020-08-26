@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, Button, StyleSheet, Platform } from "react-native";
 import { connect } from "react-redux";
-
-// import { CATEGORIES } from '../data/dummy-data';
-import Colors from "../constants/Colors";
+import { white} from "../utils/colors";
 
 // const Test = props => {
 class Test extends Component {
@@ -16,9 +14,9 @@ class Test extends Component {
 
         title: navigation.getParam("categoryId"),
         headerStyle: {
-          backgroundColor: Platform.OS === "android" ? "#FB005B" : "",
+          backgroundColor: Platform.OS === "android" ? "#FB005B" : white,
         },
-        headerTintColor: Platform.OS === "android" ? "" : "#FB005B",
+        headerTintColor: Platform.OS === "android" ? white : "#FB005B",
   })
 
   componentDidMount() {
