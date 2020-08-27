@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   TouchableOpacity,
   View,
@@ -8,23 +9,13 @@ import {
   TouchableNativeFeedback
 } from 'react-native';
 
-// const ChangeColorFunction = () => {
-//   var ColorCode =
-//     "rgb(" +
-//     Math.floor(Math.random() * 256) +
-//     "," +
-//     Math.floor(Math.random() * 256) +
-//     "," +
-//     Math.floor(Math.random() * 256) +
-//     ")";
-// };
-
-const DeckGrids = props => {
+const DeckGrid = props => {
   let TouchableCmp = TouchableOpacity;
 
   if (Platform.OS === 'android' && Platform.Version >= 21) {
     TouchableCmp = TouchableNativeFeedback;
   }
+  // {console.log("DeclGrid:"+props.created)}
 
   return (
 
@@ -47,6 +38,11 @@ const DeckGrids = props => {
     </View>
   );
 };
+
+// DeckGrid.propTypes = {
+//   deck: PropTypes.object.isRequired,
+//   allowNavigation: PropTypes.bool
+// };
 
 const styles = StyleSheet.create({
   gridItem: {
@@ -81,4 +77,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default DeckGrids;
+export default DeckGrid;

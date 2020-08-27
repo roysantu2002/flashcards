@@ -3,9 +3,10 @@ import { View, Text, Button, StyleSheet, Platform, TouchableOpacity} from "react
 import { connect } from "react-redux";
 import { white} from "../utils/colors";
 import globalStyles from '../utils/globalStyles';
+import NavigationService from '../navigation/navigationService';
 
 // const Test = props => {
-class Test extends Component {
+class Deck extends Component {
 
   state = {
     showNoQuestionsError: false
@@ -19,20 +20,30 @@ class Test extends Component {
       this.setState({ showNoQuestionsError: true });
     } else {
       NavigationService.navigate('Quiz', {
-        deckId: deck.id
+        deckId: deckId
       });
     }
   };
 
   handleAddCard = () => {
 
-    const { deck } = this.props;
+    // console.log("add:"+this.props.onSelect)
+    this.props.navigation.navigate({
+      routeName: "AddCard",
+      params: {
+        categoryId: this.props.navigation.getParam("categoryId"),
+      },
+    })
 
-    this.setState({ showNoQuestionsError: false });
+    // const { deck } = this.props;
 
-    NavigationService.navigate('AddCard', {
-      deckId: deck.id
-    });
+    // this.setState({ showNoQuestionsError: false });
+
+    // // this.setState({ showNoQuestionsError: false });
+
+    // NavigationService.navigate('AddCard', {
+    //   deckId: this.props.deckId
+    // });
 
   };
 
@@ -64,9 +75,9 @@ class Test extends Component {
 
   componentDidUpdate(prevProps) {
 
-    this.navigation.setParams({
-      myTitle: navigation.getParam("categoryId")
-     })
+    // this.navigation.setParams({
+    //   myTitle: navigation.getParam("categoryId")
+    //  })
 
     const {navigation} = this.props
     const CATEGORIES  = this.props
@@ -136,17 +147,20 @@ const styles = StyleSheet.create({
   },
 });
 
-function mapStateToProps(decks) {
-  // const catId = navigation.getParam("categoryId");
+function mapStateToProps(decks, { navigation }) {
+  const { deckId } = navigation.getParam("categoryId")
+
   const CATEGORIES = Object.keys(decks)
     .map((key) => decks[key])
     .sort((a, b) => b.timestamp - a.timestamp);
 
   return {
-    CATEGORIES,
+    deckId,
+    deck: decks[deckId],
+    CATEGORIES
   };
 }
 
-export default connect(mapStateToProps)(Test);
+export default connect(mapStateToProps)(Deck);
 
 // export default Test;

@@ -66,6 +66,7 @@ class AddCard extends Component {
   };
 
   render() {
+    console.log("Add Card:",  this.props.navigation.getParam("categoryId"))
     return (
       <View style={{flex: 1}}>
 
@@ -100,9 +101,25 @@ class AddCard extends Component {
   }
 }
 
+
+const styles = StyleSheet.create({
+  tagline: {
+    color: textColor,
+    fontSize: 16
+  },
+  label:{
+    marginTop: 32,
+    marginBottom: 4,
+    fontSize: 16
+    // fontFamily: robotoMedium
+  }
+});
+
+
 function mapDispatchToProps(dispatch, { navigation }) {
 
   return {
+    
     addCard: (question, answer) => {
       const { deckId } = navigation.state.params;
       const questionDetails = {
@@ -119,16 +136,3 @@ function mapDispatchToProps(dispatch, { navigation }) {
 }
 
 export default connect(null, mapDispatchToProps)(AddCard);
-
-const styles = StyleSheet.create({
-  tagline: {
-    color: textColor,
-    fontSize: 16
-  },
-  label:{
-    marginTop: 32,
-    marginBottom: 4,
-    fontSize: 16
-    // fontFamily: robotoMedium
-  }
-});

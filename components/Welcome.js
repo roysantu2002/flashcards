@@ -10,7 +10,7 @@ import {
 } from "react-native";
 
 // import { CATEGORIES } from '../data/dummy-data';
-import DeckGrids from "./DeckGrids";
+import DeckGrid from "./DeckGrid";
 
 import Colors from "../constants/Colors";
 
@@ -36,7 +36,7 @@ class Welcome extends Component {
     // const itemData = this.state.itemData
     // // const categoryId = itemData.item.id
     return (
-      <DeckGrids
+      <DeckGrid
         title={itemData.item.title}
         created={itemData.item.created}
         flashcards={itemData.item.questions.length}
