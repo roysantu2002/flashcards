@@ -10,7 +10,7 @@ function QuizResults(props) {
 
   const { totalQuestions, questionsAnsweredCorrectly, onStartQuizAgain } = props;
   const percentage = Math.round((100 / totalQuestions) * questionsAnsweredCorrectly);
-
+  {console.log(props)}
   return (
     <View>
       <Text style={globalStyles.title}>Quiz Complete</Text>
@@ -25,7 +25,8 @@ function QuizResults(props) {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={NavigationService.goBack}
+        onPress={() => {
+          props.navigation.popToTop()}}
         style={globalStyles.btnSecondary}>
         <Text style={globalStyles.btnSecondaryText}>Return To Deck</Text>
       </TouchableOpacity>
@@ -33,11 +34,11 @@ function QuizResults(props) {
   );
 }
 
-QuizResults.propTypes = {
-  totalQuestions: PropTypes.number.isRequired,
-  questionsAnsweredCorrectly: PropTypes.number.isRequired,
-  onStartQuizAgain: PropTypes.func.isRequired
-};
+// QuizResults.propTypes = {
+//   totalQuestions: PropTypes.number.isRequired,
+//   questionsAnsweredCorrectly: PropTypes.number.isRequired,
+//   onStartQuizAgain: PropTypes.func.isRequired
+// };
 
 const styles = StyleSheet.create({
   largeText: {

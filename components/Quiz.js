@@ -29,8 +29,8 @@ class Quiz extends Component {
 
       this.setState({quizComplete: true});
 
-      await clearLocalNotification();
-      await setLocalNotification();
+      // await clearLocalNotification();
+      // await setLocalNotification();
 
     } else {
       this.setState({currentQuestionIndex: this.state.currentQuestionIndex + 1});
@@ -67,6 +67,7 @@ class Quiz extends Component {
                 questionsAnsweredCorrectly={answeredCorrectly}
                 totalQuestions={questions.length}
                 onStartQuizAgain={this.handleStartQuizAgain}
+                navigation={this.props.navigation}
 
               />
             : <Question
