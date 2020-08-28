@@ -12,7 +12,7 @@ class Test extends Component {
 
   static navigationOptions = ({navigation}) => ({
 
-        title: navigation.getParam("categoryId"),
+        title: navigation.getParam("deckId"),
         headerStyle: {
           backgroundColor: Platform.OS === "android" ? "#FB005B" : white,
         },
@@ -23,7 +23,7 @@ class Test extends Component {
     
     const {navigation} = this.props
     const CATEGORIES  = this.props
-    const catId = navigation.getParam("categoryId")
+    const catId = navigation.getParam("deckId")
     // const {selectedCategory} = CATEGORIES.find((cat) => cat.id === catId)
     // console.log(selectedCategory.title)
     //  this.setState({
@@ -35,12 +35,12 @@ class Test extends Component {
   componentDidUpdate(prevProps) {
 
     this.navigation.setParams({
-      myTitle: navigation.getParam("categoryId")
+      myTitle: navigation.getParam("deckId")
      })
 
     const {navigation} = this.props
     const CATEGORIES  = this.props
-    // const catId = navigation.getParam("categoryId")
+    // const catId = navigation.getParam("deckId")
     // const {CATEGORIES}  = this.props
     // const {selectedCategory} = CATEGORIES.find((cat) => cat.id === catId)
 
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(decks) {
-  // const catId = navigation.getParam("categoryId");
+  // const catId = navigation.getParam("deckId");
   const CATEGORIES = Object.keys(decks)
     .map((key) => decks[key])
     .sort((a, b) => b.timestamp - a.timestamp);

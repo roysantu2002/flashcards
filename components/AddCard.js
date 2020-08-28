@@ -72,11 +72,11 @@ class AddCard extends Component {
   };
 
   render() {
-    const { deckId } = this.props.navigation.getParam("categoryId");
+    const { deckId } = this.props.navigation.getParam("deckId");
 
     return (
       <View style={{ flex: 1 }}>
-        <Text>{this.props.navigation.getParam("categoryId")}</Text>
+        <Text>{this.props.navigation.getParam("deckId")}</Text>
         <View style={globalStyles.viewContainer}>
           <Text style={globalStyles.title}>Add Card</Text>
           <Text style={styles.tagline}>
@@ -111,7 +111,7 @@ class AddCard extends Component {
 
           <TouchableOpacity
             onPress={this.onSubmit(
-              this.props.navigation.getParam("categoryId")
+              this.props.navigation.getParam("deckId")
             )}
             style={globalStyles.btnPrimary}
           >
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
 function mapDispatchToProps(dispatch, { navigation }) {
   return {
     addCard: (deckId, question, answer) => {
-      // const { deckId } = navigation.getParam("categoryId");
+      // const { deckId } = navigation.getParam("deckId");
       const questionDetails = {
         deckId,
         question,

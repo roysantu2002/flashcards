@@ -16,14 +16,22 @@ class Deck extends Component {
 
     const { deck, questionsCount } = this.props;
 
-    if (questionsCount === 0){
-      this.setState({ showNoQuestionsError: true });
-    } else {
-      NavigationService.navigate('Quiz', {
-        deckId: deckId
-      });
-    }
-  };
+    this.props.navigation.navigate({
+      routeName: "Quiz",
+      params: {
+        deckId: this.props.navigation.getParam("deckId"),
+      },
+    })
+
+  }
+  //   if (questionsCount === 0){
+  //     this.setState({ showNoQuestionsError: true });
+  //   } else {
+  //     NavigationService.navigate('Quiz', {
+  //       deckId: deckId
+  //     });
+  //   }
+  // };
 
   handleAddCard = () => {
 
@@ -31,9 +39,10 @@ class Deck extends Component {
     this.props.navigation.navigate({
       routeName: "AddCard",
       params: {
-        categoryId: this.props.navigation.getParam("categoryId"),
+        deckId: this.props.navigation.getParam("deckId"),
       },
     })
+  }
 
     // const { deck } = this.props;
 
@@ -45,7 +54,7 @@ class Deck extends Component {
     //   deckId: this.props.deckId
     // });
 
-  };
+  // };
 
   // state = { selectedCategory: []};
 
@@ -53,7 +62,7 @@ class Deck extends Component {
 
   static navigationOptions = ({navigation}) => ({
 
-        title: navigation.getParam("categoryId"),
+        title: navigation.getParam("deckId"),
         headerStyle: {
           backgroundColor: Platform.OS === "android" ? "#FB005B" : white,
         },
@@ -64,7 +73,7 @@ class Deck extends Component {
     
     const {navigation} = this.props
     const CATEGORIES  = this.props
-    const catId = navigation.getParam("categoryId")
+    const catId = navigation.getParam("deckId")
     // const {selectedCategory} = CATEGORIES.find((cat) => cat.id === catId)
     // console.log(selectedCategory.title)
     //  this.setState({
@@ -76,12 +85,12 @@ class Deck extends Component {
   componentDidUpdate(prevProps) {
 
     // this.navigation.setParams({
-    //   myTitle: navigation.getParam("categoryId")
+    //   myTitle: navigation.getParam("deckId")
     //  })
 
     const {navigation} = this.props
     const CATEGORIES  = this.props
-    // const catId = navigation.getParam("categoryId")
+    // const catId = navigation.getParam("deckId")
     // const {CATEGORIES}  = this.props
     // const {selectedCategory} = CATEGORIES.find((cat) => cat.id === catId)
 
@@ -148,7 +157,7 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(decks, { navigation }) {
-  const { deckId } = navigation.getParam("categoryId")
+  const { deckId } = navigation.getParam("deckId")
 
   const CATEGORIES = Object.keys(decks)
     .map((key) => decks[key])

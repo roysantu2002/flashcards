@@ -7,6 +7,7 @@ import Deck from "../components/Deck"
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 // import AddDeck from '../screens/AddDeck'
 import AddCard from '../components/AddCard'
+import Quiz from '../components/Quiz'
 import { CATEGORIES } from '../data/dummy-data';
 
 // const renderGridItem = itemData => {
@@ -24,6 +25,9 @@ const FlashCardsStack = createStackNavigator({
   },
   AddCard: {
     screen: AddCard
+  },
+  Quiz: {
+    screen: Quiz
   }
   // MealDetail: Welcome
 });

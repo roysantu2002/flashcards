@@ -34,7 +34,7 @@ class Welcome extends Component {
   renderGridItem = (itemData) => {
 
     // const itemData = this.state.itemData
-    // // const categoryId = itemData.item.id
+    // // const deckId = itemData.item.id
     return (
       <DeckGrid
         title={itemData.item.title}
@@ -44,7 +44,7 @@ class Welcome extends Component {
           this.props.navigation.navigate({
             routeName: "Deck",
             params: {
-              categoryId: itemData.item.id,
+              deckId: itemData.item.id,
             },
           });
         }}
@@ -57,7 +57,7 @@ class Welcome extends Component {
     //     props.navigation.navigate({
     //       routeName: 'Deck',
     //       params: {
-    //         categoryId: itemData.item.id
+    //         deckId: itemData.item.id
     //       }
     //     });
     //   }}
@@ -87,7 +87,7 @@ class Welcome extends Component {
 }
 
 // Welcome.navigationOptions = navigationData => {
-//   const catId = navigationData.navigation.getParam('categoryId');
+//   const catId = navigationData.navigation.getParam('deckId');
 
 //   const selectedCategory = CATEGORIES.find(cat => cat.id === catId);
 

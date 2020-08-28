@@ -22,7 +22,7 @@ const Welcome = props => {
           props.navigation.navigate({
             routeName: 'Deck',
             params: {
-              categoryId: itemData.item.id
+              deckId: itemData.item.id
             }
           });
         }}
@@ -45,7 +45,7 @@ const Welcome = props => {
 };
 
 // Welcome.navigationOptions = navigationData => {
-//   const catId = navigationData.navigation.getParam('categoryId');
+//   const catId = navigationData.navigation.getParam('deckId');
 
 //   const selectedCategory = CATEGORIES.find(cat => cat.id === catId);
 

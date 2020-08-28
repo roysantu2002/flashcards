@@ -5,7 +5,7 @@ import { CATEGORIES } from '../data/dummy-data';
 import Colors from '../constants/Colors';
 
 const DecksDetails = props => {
-  const catId = props.navigation.getParam('categoryId');
+  const catId = props.navigation.getParam('deckId');
 
   const selectedCategory = CATEGORIES.find(cat => cat.id === catId);
 
@@ -32,7 +32,7 @@ const DecksDetails = props => {
 };
 
 DecksDetails.navigationOptions = navigationData => {
-  const catId = navigationData.navigation.getParam('categoryId');
+  const catId = navigationData.navigation.getParam('deckId');
 
   const selectedCategory = CATEGORIES.find(cat => cat.id === catId);
 
