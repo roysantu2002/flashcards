@@ -13,6 +13,7 @@ function decks(state = {}, action) {
         [action.deck.id]: action.deck
       };
     case ADD_CARD:
+      console.log("ADD_CARD:", +action)
       return {
         ...state,
         [action.questionDetails.deckId]: {

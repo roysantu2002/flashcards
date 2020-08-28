@@ -1,35 +1,41 @@
-import React, { Component } from 'react';
-import { addCard } from '../actions';
-import { connect } from 'react-redux';
-import { Text, View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-import globalStyles from '../utils/globalStyles';
-import { textColor } from '../utils/colors';
+import React, { Component } from "react";
+import { addCard } from "../actions";
+import { connect } from "react-redux";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
+import globalStyles from "../utils/globalStyles";
+import { textColor } from "../utils/colors";
 // import { robotoMedium } from '../utils/fonts';
 
 class AddCard extends Component {
-
   state = {
-    question: '',
-    answer: '',
+    question: "",
+    answer: "",
     showQuestionRequiredError: false,
-    showAnswerRequiredError: false
+    showAnswerRequiredError: false,
   };
 
   resetState = () => {
     this.setState({
-      question: '',
-      answer: '',
+      question: "",
+      answer: "",
       showQuestionRequiredError: false,
-      showAnswerRequiredError: false
+      showAnswerRequiredError: false,
     });
   };
 
-  onSubmit = () => {
-
+  onSubmit = (deckId) => () => {
+    // const deckId  = value;
+    console.log("Onsubmit:", deckId)
     const { addCard, goBack } = this.props;
     const { question, answer } = this.state;
-    const questionNoWhitespace = question.replace(/\s/g, '');
-    const answerNoWhitespace = answer.replace(/\s/g, '');
+    const questionNoWhitespace = question.replace(/\s/g, "");
+    const answerNoWhitespace = answer.replace(/\s/g, "");
 
     let validationFailed = false;
 
@@ -51,7 +57,7 @@ class AddCard extends Component {
       return;
     }
 
-    addCard(question, answer);
+    addCard(deckId, question, answer);
     goBack();
 
     this.resetState();
@@ -66,73 +72,84 @@ class AddCard extends Component {
   };
 
   render() {
-    console.log("Add Card:",  this.props.navigation.getParam("categoryId"))
+    const { deckId } = this.props.navigation.getParam("categoryId");
+
     return (
-      <View style={{flex: 1}}>
-
+      <View style={{ flex: 1 }}>
+        <Text>{this.props.navigation.getParam("categoryId")}</Text>
         <View style={globalStyles.viewContainer}>
-
           <Text style={globalStyles.title}>Add Card</Text>
-          <Text style={styles.tagline}>Add a new card to the deck of flashcards</Text>
-
+          <Text style={styles.tagline}>
+            Add a new card to the deck of flashcards
+          </Text>
 
           <Text style={styles.label}>Your question</Text>
-          <TextInput value={this.state.question} onChangeText={this.onQuestionChange} style={globalStyles.textInput} />
+          <TextInput
+            value={this.state.question}
+            onChangeText={this.onQuestionChange}
+            style={globalStyles.textInput}
+          />
 
           {this.state.showQuestionRequiredError && (
-            <Text style={globalStyles.inputErrorText}>Please enter your question</Text>
+            <Text style={globalStyles.inputErrorText}>
+              Please enter your question
+            </Text>
           )}
 
           <Text style={styles.label}>The answer</Text>
-          <TextInput value={this.state.answer} onChangeText={this.onAnswerChange} style={globalStyles.textInput} />
+          <TextInput
+            value={this.state.answer}
+            onChangeText={this.onAnswerChange}
+            style={globalStyles.textInput}
+          />
 
           {this.state.showAnswerRequiredError && (
-            <Text style={globalStyles.inputErrorText}>Please enter the answer</Text>
+            <Text style={globalStyles.inputErrorText}>
+              Please enter the answer
+            </Text>
           )}
 
-          <TouchableOpacity onPress={this.onSubmit} style={globalStyles.btnPrimary}>
+          <TouchableOpacity
+            onPress={this.onSubmit(
+              this.props.navigation.getParam("categoryId")
+            )}
+            style={globalStyles.btnPrimary}
+          >
             <Text style={globalStyles.btnPrimaryText}>Add card</Text>
           </TouchableOpacity>
-
         </View>
-
       </View>
     );
   }
 }
 
-
 const styles = StyleSheet.create({
   tagline: {
     color: textColor,
-    fontSize: 16
+    fontSize: 16,
   },
-  label:{
+  label: {
     marginTop: 32,
     marginBottom: 4,
-    fontSize: 16
+    fontSize: 16,
     // fontFamily: robotoMedium
-  }
+  },
 });
 
-
 function mapDispatchToProps(dispatch, { navigation }) {
-
   return {
-    
-    addCard: (question, answer) => {
-      const { deckId } = navigation.state.params;
+    addCard: (deckId, question, answer) => {
+      // const { deckId } = navigation.getParam("categoryId");
       const questionDetails = {
         deckId,
         question,
-        answer
+        answer,
       };
 
       dispatch(addCard(questionDetails));
     },
-    goBack: () => navigation.goBack()
+    goBack: () => navigation.goBack(),
   };
-
 }
 
 export default connect(null, mapDispatchToProps)(AddCard);
