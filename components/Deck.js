@@ -1,29 +1,37 @@
 import React, { Component } from "react";
-import { View, Text, Button, StyleSheet, Platform, TouchableOpacity} from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  Platform,
+  TouchableOpacity,
+} from "react-native";
 import { connect } from "react-redux";
-import { white} from "../utils/colors";
-import globalStyles from '../utils/globalStyles';
-import NavigationService from '../navigation/navigationService';
+import { white } from "../utils/colors";
+import globalStyles from "../utils/globalStyles";
+import NavigationService from "../navigation/navigationService";
 
 // const Test = props => {
 class Deck extends Component {
-
   state = {
-    showNoQuestionsError: false
+    showNoQuestionsError: false,
   };
 
   handleStartQuiz = () => {
-
     const { deck, questionsCount } = this.props;
 
-    this.props.navigation.navigate({
-      routeName: "Quiz",
-      params: {
-        deckId: this.props.navigation.getParam("deckId"),
-      },
-    })
-
-  }
+    if (questionsCount === 0) {
+      this.setState({ showNoQuestionsError: true });
+    } else {
+      this.props.navigation.navigate({
+        routeName: "Quiz",
+        params: {
+          deckId: this.props.navigation.getParam("deckId"),
+        },
+      });
+    }
+  };
   //   if (questionsCount === 0){
   //     this.setState({ showNoQuestionsError: true });
   //   } else {
@@ -34,25 +42,24 @@ class Deck extends Component {
   // };
 
   handleAddCard = () => {
-
     // console.log("add:"+this.props.onSelect)
     this.props.navigation.navigate({
       routeName: "AddCard",
       params: {
         deckId: this.props.navigation.getParam("deckId"),
       },
-    })
-  }
+    });
+  };
 
-    // const { deck } = this.props;
+  // const { deck } = this.props;
 
-    // this.setState({ showNoQuestionsError: false });
+  // this.setState({ showNoQuestionsError: false });
 
-    // // this.setState({ showNoQuestionsError: false });
+  // // this.setState({ showNoQuestionsError: false });
 
-    // NavigationService.navigate('AddCard', {
-    //   deckId: this.props.deckId
-    // });
+  // NavigationService.navigate('AddCard', {
+  //   deckId: this.props.deckId
+  // });
 
   // };
 
@@ -60,36 +67,33 @@ class Deck extends Component {
 
   // title = this.state.selectedCategory.title
 
-  static navigationOptions = ({navigation}) => ({
-
-        title: navigation.getParam("deckId"),
-        headerStyle: {
-          backgroundColor: Platform.OS === "android" ? "#FB005B" : white,
-        },
-        headerTintColor: Platform.OS === "android" ? white : "#FB005B",
-  })
+  static navigationOptions = ({ navigation }) => ({
+    title: navigation.getParam("deckId"),
+    headerStyle: {
+      backgroundColor: Platform.OS === "android" ? "#FB005B" : white,
+    },
+    headerTintColor: Platform.OS === "android" ? white : "#FB005B",
+  });
 
   componentDidMount() {
-    
-    const {navigation} = this.props
-    const CATEGORIES  = this.props
-    const catId = navigation.getParam("deckId")
+    const { navigation } = this.props;
+    const CATEGORIES = this.props;
+    const catId = navigation.getParam("deckId");
     // const {selectedCategory} = CATEGORIES.find((cat) => cat.id === catId)
     // console.log(selectedCategory.title)
     //  this.setState({
     //   selectedCategory
     // });
-
   }
 
   componentDidUpdate(prevProps) {
-
     // this.navigation.setParams({
     //   myTitle: navigation.getParam("deckId")
     //  })
 
-    const {navigation} = this.props
-    const CATEGORIES  = this.props
+    const { navigation } = this.props;
+    const CATEGORIES = this.props;
+
     // const catId = navigation.getParam("deckId")
     // const {CATEGORIES}  = this.props
     // const {selectedCategory} = CATEGORIES.find((cat) => cat.id === catId)
@@ -101,29 +105,36 @@ class Deck extends Component {
     const { deck } = this.props;
     const { showNoQuestionsError } = this.state;
 
-    return (
+    const startQuiz = (
 
-      <View style={[globalStyles.viewContainer, { marginTop: 8}]}>
+      <TouchableOpacity
+        onPress={this.handleStartQuiz}
+        style={globalStyles.btnPrimary}
+      >
+        <Text style={globalStyles.btnPrimaryText}>Start Quiz</Text>
+      </TouchableOpacity>
+    );
+
+   
+    return (
+      <View style={[globalStyles.viewContainer, { marginTop: 8 }]}>
         <Text style={globalStyles.title}>Deck</Text>
 
-<TouchableOpacity
-  onPress={this.handleAddCard}
-  style={globalStyles.btnSecondary}>
-  <Text style={globalStyles.btnSecondaryText}>Add Card</Text>
-</TouchableOpacity>
+        <TouchableOpacity
+          onPress={this.handleAddCard}
+          style={globalStyles.btnSecondary}
+        >
+          <Text style={globalStyles.btnSecondaryText}>Add Card</Text>
+        </TouchableOpacity>
+        {/* <Text>{this.props.questionsCount}</Text> */}
 
-<TouchableOpacity
-  onPress={this.handleStartQuiz}
-  style={globalStyles.btnPrimary}>
-  <Text style={globalStyles.btnPrimaryText}>Start Quiz</Text>
-</TouchableOpacity>
+        {this.props.questionsCount !==0 ? startQuiz : 
+          <Text style={globalStyles.inputErrorText}>
+            Add quiz to start the game...
+          </Text>
+        }
 
-{showNoQuestionsError && (
-  <Text style={globalStyles.inputErrorText}>Add one or more cards before taking the quiz</Text>
-)}
-
-
-</View>
+      </View>
 
       // </View>
       // <View style={styles.screen}>
@@ -157,7 +168,8 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(decks, { navigation }) {
-  const { deckId } = navigation.getParam("deckId")
+  // const { deckId } = navigation.getParam("deckId");
+  const { deckId } = navigation.state.params;
 
   const CATEGORIES = Object.keys(decks)
     .map((key) => decks[key])
@@ -166,7 +178,8 @@ function mapStateToProps(decks, { navigation }) {
   return {
     deckId,
     deck: decks[deckId],
-    CATEGORIES
+    CATEGORIES,
+    questionsCount: decks[deckId].questions.length
   };
 }
 
