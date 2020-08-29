@@ -115,30 +115,6 @@ export default connect(
 )(AddDeck);
 
 
-// function mapDispatchToProps(dispatch, { navigation }) {
-
-//   return {
-//     addDeck: (title) => {
-
-//       const deckId = title.replace(/\s/g, '');
-//       const timestamp = Math.round(new Date() / 1000);
-//       const dateString = new Date().toISOString().split('T')[0];
-
-//       dispatch(addDeck({
-//         id: deckId,
-//         title: title,
-//         timestamp: timestamp,
-//         created: dateString,
-//         questions: []
-//       }));
-//     },
-//     goToDecks: () => navigation.navigate('Decks')
-//   };
-
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(AddDeck);
-
 const styles = StyleSheet.create({
   tagline: {
     color: textColor,

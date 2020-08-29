@@ -1,6 +1,9 @@
 export const decks = {
     CapitalCities: {
+        id: 'CapitalCities',
         title: 'Capital Cities',
+        timestamp: 1563796800,
+        created: '2020-08-25',
         questions: [
           {
             question: 'What is the capital of Canada?',
@@ -21,7 +24,10 @@ export const decks = {
         ]
       },
       Python: {
+        id: 'Python',
         title: 'Python',
+        timestamp: 1563710400,
+        created: '2020-08-21',
         questions: [
           {
             question: 'What is Python?',
@@ -30,7 +36,10 @@ export const decks = {
         ]
       },
       React: {
+        id: 'React',
         title: 'React',
+        timestamp: 1563710400,
+        created: '2020-08-21',
         questions: [
           {
             question: 'What is React?',

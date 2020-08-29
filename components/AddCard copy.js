@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-
+import { addCard } from "../actions";
+import { connect } from "react-redux";
 import {
   Text,
   View,
@@ -10,43 +10,30 @@ import {
 } from "react-native";
 import globalStyles from "../utils/globalStyles";
 import { textColor } from "../utils/colors";
-import { connect } from "react-redux";
-import { addCardToDeck } from "../actions/index";
-import { addCardToDeckAS } from "../utils/api";
+// import { robotoMedium } from '../utils/fonts';
 
 class AddCard extends Component {
-  static propTypes = {
-    navigation: PropTypes.object.isRequired,
-    title: PropTypes.string.isRequired,
-    addCardToDeck: PropTypes.func.isRequired,
-  };
   state = {
     question: "",
     answer: "",
+    showQuestionRequiredError: false,
+    showAnswerRequiredError: false,
   };
 
-  handleQuestionChange = (question) => {
-    this.setState({ question });
+  resetState = () => {
+    this.setState({
+      question: "",
+      answer: "",
+      showQuestionRequiredError: false,
+      showAnswerRequiredError: false,
+    });
   };
-  handleAnswerChange = (answer) => {
-    this.setState({ answer });
-  };
-
-  // resetState = () => {
-  //   this.setState({
-  //     question: "",
-  //     answer: "",
-  //     showQuestionRequiredError: false,
-  //     showAnswerRequiredError: false,
-  //   });
-  // };
 
   onSubmit = (deckId) => () => {
-    const { addCardToDeck, title, navigation } = this.props;
-
-    // const { addCard, goBack } = this.props;
+    // const deckId  = value;
+    console.log("Onsubmit:", deckId)
+    const { addCard, goBack } = this.props;
     const { question, answer } = this.state;
-
     const questionNoWhitespace = question.replace(/\s/g, "");
     const answerNoWhitespace = answer.replace(/\s/g, "");
 
@@ -70,17 +57,8 @@ class AddCard extends Component {
       return;
     }
 
-    const card = {
-      question: this.state.question,
-      answer: this.state.answer,
-    };
-
-    addCardToDeck(title, card);
-    addCardToDeckAS(title, card);
-
-    this.setState({ question: "", answer: "" });
-
-    navigation.goBack();
+    addCard(deckId, question, answer);
+    goBack();
 
     this.resetState();
   };
@@ -132,7 +110,9 @@ class AddCard extends Component {
           )}
 
           <TouchableOpacity
-            onPress={this.onSubmit(this.props.title)}
+            onPress={this.onSubmit(
+              this.props.navigation.getParam("deckId")
+            )}
             style={globalStyles.btnPrimary}
           >
             <Text style={globalStyles.btnPrimaryText}>Add card</Text>
@@ -156,15 +136,20 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state, { navigation }) => {
-  const title = navigation.getParam('title', 'undefined');
-
+function mapDispatchToProps(dispatch, { navigation }) {
   return {
-    title
-  };
-};
+    addCard: (deckId, question, answer) => {
+      // const { deckId } = navigation.getParam("deckId");
+      const questionDetails = {
+        deckId,
+        question,
+        answer,
+      };
 
-export default connect(
-  mapStateToProps,
-  { addCardToDeck }
-)(AddCard);
+      dispatch(addCard(questionDetails));
+    },
+    goBack: () => navigation.goBack(),
+  };
+}
+
+export default connect(null, mapDispatchToProps)(AddCard);

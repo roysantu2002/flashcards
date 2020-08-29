@@ -31,7 +31,7 @@ class Deck extends Component {
   handleStartQuiz = () => {
     const { deck, questionsCount } = this.props;
     const { navigate } = this.props.navigation;
-    const { deckId } = this.props.navigation.getParam("deckId")
+    const { title } = this.props.navigation.getParam("title")
 
     if (questionsCount === 0) {
       this.setState({ showNoQuestionsError: true });
@@ -39,7 +39,7 @@ class Deck extends Component {
       navigate.navigation.navigate({
         routeName: "Quiz",
         params: {
-          deckId: deckId,
+          title: title,
         },
       });
     }
@@ -121,7 +121,7 @@ class Deck extends Component {
   // title = this.state.selectedCategory.title
 
   static navigationOptions = ({ navigation }) => ({
-    title: navigation.getParam("deckId"),
+    title: navigation.getParam("title"),
     headerStyle: {
       backgroundColor: Platform.OS === "android" ? "#FB005B" : white,
     },
@@ -155,9 +155,11 @@ class Deck extends Component {
   // }
 
   render() {
+
+    console.log("Deck:", this.props)
     const { deck } = this.props;
     const { showNoQuestionsError } = this.props;
-    const {deckId} = this.props.navigation.getParam("deckId")
+    const {title} = this.props
 
     const startQuiz = (
 
@@ -230,11 +232,13 @@ const styles = StyleSheet.create({
 
 
 const mapStateToProps = (decks, ownProps) => {
-  const { deckId } = ownProps.navigation.state.params;
-  const deck = decks[deckId];
+  const { title } = ownProps.navigation.state.params;
+  const deck = decks[title];
   return { 
-    deck,
-    questionsCount: decks[deckId].questions.length };
+    decks, 
+    title,
+    questionsCount: decks[title].questions.length };
+    // questionsCount: decks[title].questions.length };
     // questionsCount: decks[deckId].questions.length };
 };
 

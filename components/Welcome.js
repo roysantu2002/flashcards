@@ -49,9 +49,11 @@ class Welcome extends Component {
 
   renderGridItem = (itemData) => {
 
+    console.log("render:", itemData.item.title)
     // const itemData = this.state.itemData
-    // // const deckId = itemData.item.id
+    const title = itemData.item.title
     return (
+      
       <DeckGrid
         title={itemData.item.title}
         // created={itemData.item.created}
@@ -60,7 +62,7 @@ class Welcome extends Component {
           this.props.navigation.navigate({
             routeName: "Deck",
             params: {
-              deckId: itemData.item.id,
+              title: this.title,
             },
           });
         }}
@@ -86,7 +88,7 @@ class Welcome extends Component {
   };
 
   render() {
-    const { decks, navigation } = this.props;
+    const { decks, navigation, title } = this.props;
    
     const decksList =  Object.keys(decks)
                       .map((key) => decks[key])
@@ -96,7 +98,7 @@ class Welcome extends Component {
     return (
 
       <FlatList
-        keyExtractor={(item, index) => item.id}
+        keyExtractor={(item, index) => item.title}
         data={decksList}
         renderItem={this.renderGridItem}
         numColumns={2}
