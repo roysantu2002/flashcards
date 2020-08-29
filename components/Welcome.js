@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from 'prop-types';
 import {
   View,
   Text,
@@ -9,6 +10,7 @@ import {
   Platform,
 } from "react-native";
 
+import { handleInitialData } from '../actions/index';
 // import { CATEGORIES } from '../data/dummy-data';
 import DeckGrid from "./DeckGrid";
 
@@ -18,18 +20,32 @@ import Colors from "../constants/Colors";
 
 class Welcome extends Component {
 
-  state = { itemData: [] };
-  
-
   async componentDidMount() {
-    const { CATEGORIES } = this.props;
-
-    this.setState({
-      itemData: CATEGORIES
-    });
-
-    // console.print(this.state.itemData)
+    this.props.handleInitialData();
   }
+
+  // static propTypes = {
+  //   navigation: PropTypes.object.isRequired,
+  //   handleInitialData: PropTypes.func.isRequired,
+  //   decks: PropTypes.object.isRequired
+  // };
+  // shouldComponentUpdate(nextProps) {
+  //   return nextProps.deck !== undefined;
+  // }
+  // state = { itemData: [] };
+  
+  // async componentDidMount() {
+
+  //   this.props.handleInitialData();
+
+  //   // const { CATEGORIES } = this.props;
+
+  //   // this.setState({
+  //   //   itemData: CATEGORIES
+  //   // });
+
+  //   // console.print(this.state.itemData)
+  // }
 
   renderGridItem = (itemData) => {
 
@@ -38,7 +54,7 @@ class Welcome extends Component {
     return (
       <DeckGrid
         title={itemData.item.title}
-        created={itemData.item.created}
+        // created={itemData.item.created}
         flashcards={itemData.item.questions.length}
         onSelect={() => {
           this.props.navigation.navigate({
@@ -69,38 +85,25 @@ class Welcome extends Component {
     // );
   };
 
-
-
   render() {
-    const { CATEGORIES } = this.props;
-    console.log(CATEGORIES)
+    const { decks, navigation } = this.props;
+   
+    const decksList =  Object.keys(decks)
+                      .map((key) => decks[key])
+
+    console.log("decksList", decksList)
 
     return (
+
       <FlatList
         keyExtractor={(item, index) => item.id}
-        data={CATEGORIES}
+        data={decksList}
         renderItem={this.renderGridItem}
         numColumns={2}
       />
     );
   }
 }
-
-// Welcome.navigationOptions = navigationData => {
-//   const catId = navigationData.navigation.getParam('deckId');
-
-//   const selectedCategory = CATEGORIES.find(cat => cat.id === catId);
-
-//   return {
-//     headerTitle: selectedCategory.title,
-//     headerStyle: {
-//       backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : ''
-//     },
-//     headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor
-//   };
-// };
-
-
 
 const styles = StyleSheet.create({
   screen: {
@@ -115,16 +118,24 @@ const styles = StyleSheet.create({
   },
 });
 
-function mapStateToProps(decks) {
-  const CATEGORIES = Object.keys(decks)
-    .map((key) => decks[key])
-    .sort((a, b) => b.timestamp - a.timestamp);
 
-  return {
-    CATEGORIES,
-  };
-}
+const mapStateToProps = state => ({ decks: state });
 
-export default connect(mapStateToProps)(Welcome);
+export default connect(
+  mapStateToProps,
+  { handleInitialData }
+)(Welcome);
+
+// function mapStateToProps(decks) {
+//   const CATEGORIES = Object.keys(decks)
+//     .map((key) => decks[key])
+//     .sort((a, b) => b.timestamp - a.timestamp);
+
+//   return {
+//     CATEGORIES,
+//   };
+// }
+
+// export default connect(mapStateToProps)(Welcome);
 
 // export default Welcome;

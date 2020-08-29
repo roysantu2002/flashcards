@@ -13,18 +13,10 @@ export function receiveDecks(decks) {
   };
 }
 
-export function addDeck(title) {
+export function addDeck(deck) {
   return {
     type: ADD_DECK,
-    title
-  };
-}
-
-export function addCardToDeck(deckId, card) {
-  return {
-    type: ADD_CARD,
-    deckId,
-    card
+    deck
   };
 }
 
@@ -47,11 +39,5 @@ export function handleInitialData() {
     return fetchAllDecks().then(decks => {
       dispatch(receiveDecks(decks));
     });
-  };
-}
-
-export function resetStore() {
-  return {
-    type: RESET_STORE
   };
 }

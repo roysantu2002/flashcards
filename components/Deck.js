@@ -6,9 +6,10 @@ import {
   StyleSheet,
   Platform,
   TouchableOpacity,
+  Alert
 } from "react-native";
 import { connect } from "react-redux";
-import { deleteDeckAS } from '../utils/api'
+import { removeDeckFromStorage } from '../utils/api'
 import { deleteDeck } from '../actions/index'
 import { white } from "../utils/colors";
 import globalStyles from "../utils/globalStyles";
@@ -16,20 +17,29 @@ import globalStyles from "../utils/globalStyles";
 
 // const Test = props => {
 class Deck extends Component {
-  state = {
-    showNoQuestionsError: false,
-  };
+
+  // static propTypes = {
+  //   navigation: PropTypes.object.isRequired,
+  //   removeDeck: PropTypes.func.isRequired,
+  //   deck: PropTypes.object
+  // };
+ 
+  // state = {
+  //   showNoQuestionsError: false,
+  // };
 
   handleStartQuiz = () => {
     const { deck, questionsCount } = this.props;
+    const { navigate } = this.props.navigation;
+    const { deckId } = this.props.navigation.getParam("deckId")
 
     if (questionsCount === 0) {
       this.setState({ showNoQuestionsError: true });
     } else {
-      this.props.navigation.navigate({
+      navigate.navigation.navigate({
         routeName: "Quiz",
         params: {
-          deckId: this.props.navigation.getParam("deckId"),
+          deckId: deckId,
         },
       });
     }
@@ -44,9 +54,14 @@ class Deck extends Component {
   // };
 
   handleDelete = () => {
-    deleteDeck(this.props.navigation.getParam("deckId"))
-    deleteDeckAS(this.props.navigation.getParam("deckId"))
-    // this.props.navigation.goBack()
+    const { deck, questionsCount } = this.props;
+    const { navigate } = this.props.navigation;
+    const { deckId } = this.props.navigation.getParam("deckId")
+    const { removeDeck, navigation } = this.props;
+
+    deleteDeck(deckId)
+    deleteDeckAS(deckId)
+    this.props.navigation.goBack()
   //   this.props.navigation.navigate({
   //     routeName: "AddCard",
   //     params: {
@@ -63,6 +78,30 @@ class Deck extends Component {
         deckId: this.props.navigation.getParam("deckId"),
       },
     });
+  };
+
+  handleDeleteDeck = () => {
+    // delete deck, then go back
+    // const { deckId } = this.props.navigation.state.params;
+    const { deck, navigation } = this.props;
+
+    Alert.alert(
+      "Delete Deck",
+      `Are you sure you want to delete the deck ${deck.title}?`,
+      [
+        { text: "Cancel" },
+        {
+          text: "OK",
+          onPress: async () => {
+            const { deleteDeck } = this.props;
+            await removeDeckFromStorage(deck.title);
+            deleteDeck(deck.title);
+            navigation.navigate("Decks");
+          }
+        }
+      ],
+      { cancelable: true }
+    );
   };
 
   // const { deck } = this.props;
@@ -117,7 +156,7 @@ class Deck extends Component {
 
   render() {
     const { deck } = this.props;
-    const { showNoQuestionsError } = this.state;
+    const { showNoQuestionsError } = this.props;
     const {deckId} = this.props.navigation.getParam("deckId")
 
     const startQuiz = (
@@ -145,7 +184,7 @@ class Deck extends Component {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={this.handleDelete}
+          onPress={() => this.handleDeleteDeck()}
           style={globalStyles.btnSecondary}
         >
           <Text style={globalStyles.btnSecondaryText}>Delete Card</Text>
@@ -189,22 +228,38 @@ const styles = StyleSheet.create({
   },
 });
 
-function mapStateToProps(decks, { navigation }) {
-  //const { deckId } = navigation.getParam("deckId");
-  const { deckId } = navigation.state.params;
 
-  const CATEGORIES = Object.keys(decks)
-    .map((key) => decks[key])
-    .sort((a, b) => b.timestamp - a.timestamp);
+const mapStateToProps = (decks, ownProps) => {
+  const { deckId } = ownProps.navigation.state.params;
+  const deck = decks[deckId];
+  return { 
+    deck,
+    questionsCount: decks[deckId].questions.length };
+    // questionsCount: decks[deckId].questions.length };
+};
 
-  return {
-    deckId,
-    deck: decks[deckId],
-    CATEGORIES,
-    questionsCount: decks[deckId].questions.length
-  };
-}
+export default connect(
+  mapStateToProps,
+  { deleteDeck }
+)(Deck);
 
-export default connect(mapStateToProps, deleteDeck)(Deck);
+
+// function mapStateToProps(decks, { navigation }) {
+//   //const { deckId } = navigation.getParam("deckId");
+//   const { deckId } = navigation.state.params;
+
+//   const CATEGORIES = Object.keys(decks)
+//     .map((key) => decks[key])
+//     .sort((a, b) => b.timestamp - a.timestamp);
+
+//   return {
+//     deckId,
+//     deck: decks[deckId],
+//     CATEGORIES,
+//     questionsCount: decks[deckId].questions.length
+//   };
+// }
+
+// export default connect(mapStateToProps, deleteDeck)(Deck);
 
 // export default Test;

@@ -27,9 +27,9 @@ const DeckGrid = props => {
           <Text style={styles.title} numberOfLines={1}>
             {props.title}
           </Text>
-          <Text style={styles.created} numberOfLines={1}>
+          {/* <Text style={styles.created} numberOfLines={1}>
             created: {props.created}
-          </Text>
+          </Text> */}
           <Text style={styles.title} numberOfLines={1}>
             flashcard: {props.flashcards}
           </Text>

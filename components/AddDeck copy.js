@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Text, View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import globalStyles from '../utils/globalStyles';
@@ -8,30 +7,27 @@ import { textColor } from '../utils/colors';
 // import CustomStatusBar from '../components/CustomStatusBar';
 import { addDeck } from '../actions';
 import { saveDeckTitleAS } from '../utils/api';
-import { StackActions, NavigationActions } from 'react-navigation';
+
 
 class AddDeck extends Component {
 
-  static propTypes = {
-    navigation: PropTypes.object.isRequired,
-    addDeck: PropTypes.func.isRequired
-  };
-
   state = {
-    title: ''
+    title: '',
+    showRequiredInputError: false,
+    showUniqueNameError: false
   };
 
-  onTitleChange = (value) => {
-    this.setState({ title: value });
+  resetState = () => {
+    this.setState({
+      title: '',
+      showRequiredInputError: false,
+      showUniqueNameError: false
+    });
   };
-
 
   onSubmit = () => {
 
-    // const { decks, addDeck, goToDecks } = this.props;
-    // const { title } = this.state;
-
-    const { decks, addDeck, navigation } = this.props;
+    const { decks, addDeck, goToDecks } = this.props;
     const { title } = this.state;
 
     const titleNoWhitespace = title.replace(/\s/g, '');
@@ -53,23 +49,16 @@ class AddDeck extends Component {
       return;
     }
 
-    addDeck(title)
-    saveDeckTitleAS(title)
-    const resetAction = StackActions.reset({
-      index: 1,
-      actions: [
-        NavigationActions.navigate({ routeName: 'Decks' }),
-        NavigationActions.navigate({
-          routeName: 'Deck',
-          params: { deckId: title }
-        })
-      ]
-    });
-    navigation.dispatch(resetAction);
+    addDeck(title);
+    goToDecks();
 
-    this.setState(() => ({ text: '' }));
+    this.resetState();
   };
-  
+
+  onTitleChange = (value) => {
+    this.setState({ title: value });
+  };
+
   render() {
     return (
       <View style={{flex: 1}}>
@@ -109,35 +98,29 @@ function mapStateToProps(decks) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { addDeck }
-)(AddDeck);
+function mapDispatchToProps(dispatch, { navigation }) {
 
+  return {
+    addDeck: (title) => {
 
-// function mapDispatchToProps(dispatch, { navigation }) {
+      const deckId = title.replace(/\s/g, '');
+      const timestamp = Math.round(new Date() / 1000);
+      const dateString = new Date().toISOString().split('T')[0];
 
-//   return {
-//     addDeck: (title) => {
+      dispatch(addDeck({
+        id: deckId,
+        title: title,
+        timestamp: timestamp,
+        created: dateString,
+        questions: []
+      }));
+    },
+    goToDecks: () => navigation.navigate('Decks')
+  };
 
-//       const deckId = title.replace(/\s/g, '');
-//       const timestamp = Math.round(new Date() / 1000);
-//       const dateString = new Date().toISOString().split('T')[0];
+}
 
-//       dispatch(addDeck({
-//         id: deckId,
-//         title: title,
-//         timestamp: timestamp,
-//         created: dateString,
-//         questions: []
-//       }));
-//     },
-//     goToDecks: () => navigation.navigate('Decks')
-//   };
-
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(AddDeck);
+export default connect(mapStateToProps, mapDispatchToProps)(AddDeck);
 
 const styles = StyleSheet.create({
   tagline: {
