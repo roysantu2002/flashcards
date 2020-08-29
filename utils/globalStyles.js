@@ -4,18 +4,28 @@ import { robotoMedium, robotoRegular } from './fonts';
 
 const globalStyles = StyleSheet.create({
   viewContainer: {
+    flex: 1,
     marginTop: "20%",
     marginLeft: 16,
     marginRight: 16,
+    flexDirection: 'column',
+    // justifyContent: 'center',
+    // alignItems: 'flex-start'
     
   },
   title: {
-    marginTop: 16,
-    fontSize: 40,
+    marginTop: "15%",
+    // marginBottom: "60%",
+    textAlign: "center",
+    fontSize: 30,
     fontFamily: robotoMedium,
     color: textColor,
-    justifyContent: 'center',
-    alignItems: 'center',
+    
+   
+  },
+  cardCount: {
+    fontSize: 15,
+    textAlign: "center",
   },
   btnPrimary: {
     justifyContent: 'center',
@@ -57,7 +67,7 @@ const globalStyles = StyleSheet.create({
     fontFamily: robotoRegular
   },
   inputErrorText: {
-    marginTop: 4,
+    marginTop: 10,
     marginBottom: 4,
     color: textRed,
     fontSize: 14,

@@ -1,27 +1,38 @@
 import { AsyncStorage } from 'react-native';
+import { decks } from './_Data'
 
-const DECKS_STORAGE_KEY = 'MobileFlashcards:Decks';
+const DECKS_STORAGE_KEY = 'Flashcards:Decks';
 
-/**
- * Get's all the decks of flashcards.
- * Using an async data approach with dummy data. Could mature to REST API later.
- */
+export function allData() {
+  return decks;
+}
+
+function formatDeckResults(results) {
+  return results === null ? decks : JSON.parse(results);
+}
+
+
 export async function fetchAllDecks() {
 
-  // TEMP: Clear async storage so always using dummy data
-  //const keys = await AsyncStorage.getAllKeys();
-  //await  AsyncStorage.multiRemove(keys);
+  try {
+  const decksStorage = await AsyncStorage.getItem(DECKS_STORAGE_KEY);
 
-  // Get all the decks from AsyncStorage. If there aren't any then use the dummy data
-  // as the default set of decks.
-  let decksJson = await AsyncStorage.getItem(DECKS_STORAGE_KEY);
-
-  if (decksJson !== null) {
-    return JSON.parse(decksJson);
-  } else {
-    AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(dummyData));
-    return dummyData;
+  if (decksStorage === null) {
+    AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decks));
   }
+
+  return decksStorage === null ? decks : JSON.parse(decksStorage);
+} catch (err) {
+  console.log(err);
+}
+  // if (decksStorage !== null) {
+  //   return JSON.parse(decksStorage);
+  // } else {
+  //   AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(dummyData));
+  //   return dummyData
+  //   // AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(dummyData));
+  //   // return dummyData;
+  // }
 }
 
 
@@ -29,11 +40,23 @@ export async function fetchAllDecks() {
 
 
 const dummyData = {
-  CapitalCities: {
-    id: 'CapitalCities',
-    title: 'Capital Cities',
+  Python: {
+    id: 'Python',
+    title: 'Python Programming',
+    timestamp: 1563710400,
+    created: '2020-08-21',
+    questions: [
+      {
+        question: 'What is Python?',
+        answer: 'Python is an interpreted, high-level, general-purpose programming language'
+      }
+    ]
+  },
+  Capitals: {
+    id: 'Capitals',
+    title: 'Capitals',
     timestamp: 1563796800,
-    created: '2019-07-22',
+    created: '2020-08-25',
     questions: [
       {
         question: 'What is the capital of Canada?',
@@ -57,7 +80,7 @@ const dummyData = {
     id: 'React',
     title: 'React',
     timestamp: 1563710400,
-    created: '2019-07-21',
+    created: '2020-08-21',
     questions: [
       {
         question: 'What is React?',

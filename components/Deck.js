@@ -118,20 +118,28 @@ class Deck extends Component {
    
     return (
       <View style={[globalStyles.viewContainer, { marginTop: 8 }]}>
-        <Text style={globalStyles.title}>Deck</Text>
-
+        <View>
+        <Text style={globalStyles.title}>{this.props.deckId}</Text>
+        {this.props.questionsCount === 0 ? <Text style={globalStyles.cardCount}>No Cards Added</Text> :
+        <Text style={globalStyles.cardCount}>{this.props.questionsCount} cards</Text>}
+        </View>
         <TouchableOpacity
           onPress={this.handleAddCard}
           style={globalStyles.btnSecondary}
         >
           <Text style={globalStyles.btnSecondaryText}>Add Card</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={this.handleAddCard}
+          style={globalStyles.btnSecondary}
+        >
+          <Text style={globalStyles.btnSecondaryText}>Delete Card</Text>
+        </TouchableOpacity>
         {/* <Text>{this.props.questionsCount}</Text> */}
 
         {this.props.questionsCount !==0 ? startQuiz : 
-          <Text style={globalStyles.inputErrorText}>
-            Add quiz to start the game...
-          </Text>
+          <Text style={globalStyles.inputErrorText}>Add one or more cards before taking the quiz</Text>
         }
 
       </View>
