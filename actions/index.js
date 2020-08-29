@@ -24,9 +24,9 @@ export function addCard(questionDetails) {
   };
 }
 
-export function deleteDeck(deck) {
+export function deleteDeck(deckId) {
   return {
     type: DELETE_DECK,
-    deck
+    deckId
   };
 }

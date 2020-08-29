@@ -8,9 +8,11 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { connect } from "react-redux";
+import { deleteDeckAS } from '../utils/api'
+import { deleteDeck } from '../actions/index'
 import { white } from "../utils/colors";
 import globalStyles from "../utils/globalStyles";
-import NavigationService from "../navigation/navigationService";
+// import NavigationService from "../navigation/navigationService";
 
 // const Test = props => {
 class Deck extends Component {
@@ -40,6 +42,18 @@ class Deck extends Component {
   //     });
   //   }
   // };
+
+  handleDelete = () => {
+    deleteDeck(this.props.navigation.getParam("deckId"))
+    deleteDeckAS(this.props.navigation.getParam("deckId"))
+    // this.props.navigation.goBack()
+  //   this.props.navigation.navigate({
+  //     routeName: "AddCard",
+  //     params: {
+  //       deckId: this.props.navigation.getParam("deckId"),
+  //     },
+  //   });
+  };
 
   handleAddCard = () => {
     // console.log("add:"+this.props.onSelect)
@@ -75,35 +89,36 @@ class Deck extends Component {
     headerTintColor: Platform.OS === "android" ? white : "#FB005B",
   });
 
-  componentDidMount() {
-    const { navigation } = this.props;
-    const CATEGORIES = this.props;
-    const catId = navigation.getParam("deckId");
-    // const {selectedCategory} = CATEGORIES.find((cat) => cat.id === catId)
-    // console.log(selectedCategory.title)
-    //  this.setState({
-    //   selectedCategory
-    // });
-  }
+  // componentDidMount() {
+  //   const { navigation } = this.props;
+  //   const CATEGORIES = this.props;
+  //   const catId = navigation.getParam("deckId");
+  //   // const {selectedCategory} = CATEGORIES.find((cat) => cat.id === catId)
+  //   // console.log(selectedCategory.title)
+  //   //  this.setState({
+  //   //   selectedCategory
+  //   // });
+  // }
 
-  componentDidUpdate(prevProps) {
-    // this.navigation.setParams({
-    //   myTitle: navigation.getParam("deckId")
-    //  })
+  // componentDidUpdate(prevProps) {
+  //   // this.navigation.setParams({
+  //   //   myTitle: navigation.getParam("deckId")
+  //   //  })
 
-    const { navigation } = this.props;
-    const CATEGORIES = this.props;
+  //   const { navigation } = this.props;
+  //   const CATEGORIES = this.props;
 
-    // const catId = navigation.getParam("deckId")
-    // const {CATEGORIES}  = this.props
-    // const {selectedCategory} = CATEGORIES.find((cat) => cat.id === catId)
+  //   // const catId = navigation.getParam("deckId")
+  //   // const {CATEGORIES}  = this.props
+  //   // const {selectedCategory} = CATEGORIES.find((cat) => cat.id === catId)
 
-    // console.log("did: "+selectedCategory)
-  }
+  //   // console.log("did: "+selectedCategory)
+  // }
 
   render() {
     const { deck } = this.props;
     const { showNoQuestionsError } = this.state;
+    const {deckId} = this.props.navigation.getParam("deckId")
 
     const startQuiz = (
 
@@ -115,14 +130,13 @@ class Deck extends Component {
       </TouchableOpacity>
     );
 
-   
     return (
       <View style={[globalStyles.viewContainer, { marginTop: 8 }]}>
-        <View>
-        <Text style={globalStyles.title}>{this.props.deckId}</Text>
+        {/* <View> */}
+        <Text style={globalStyles.title}>{this.props.navigation.getParam("deckId")}</Text>
         {this.props.questionsCount === 0 ? <Text style={globalStyles.cardCount}>No Cards Added</Text> :
         <Text style={globalStyles.cardCount}>{this.props.questionsCount} cards</Text>}
-        </View>
+        {/* </View> */}
         <TouchableOpacity
           onPress={this.handleAddCard}
           style={globalStyles.btnSecondary}
@@ -131,16 +145,16 @@ class Deck extends Component {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={this.handleAddCard}
+          onPress={this.handleDelete}
           style={globalStyles.btnSecondary}
         >
           <Text style={globalStyles.btnSecondaryText}>Delete Card</Text>
-        </TouchableOpacity>
-        {/* <Text>{this.props.questionsCount}</Text> */}
+        </TouchableOpacity> 
+        {/* {/* <Text>{this.props.questionsCount}</Text>
 
         {this.props.questionsCount !==0 ? startQuiz : 
           <Text style={globalStyles.inputErrorText}>Add one or more cards before taking the quiz</Text>
-        }
+        } */}
 
       </View>
 
@@ -176,7 +190,7 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(decks, { navigation }) {
-  // const { deckId } = navigation.getParam("deckId");
+  //const { deckId } = navigation.getParam("deckId");
   const { deckId } = navigation.state.params;
 
   const CATEGORIES = Object.keys(decks)
@@ -191,6 +205,6 @@ function mapStateToProps(decks, { navigation }) {
   };
 }
 
-export default connect(mapStateToProps)(Deck);
+export default connect(mapStateToProps, deleteDeck)(Deck);
 
 // export default Test;

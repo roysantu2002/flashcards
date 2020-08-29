@@ -11,7 +11,6 @@ function formatDeckResults(results) {
   return results === null ? decks : JSON.parse(results);
 }
 
-
 export async function fetchAllDecks() {
 
   try {
@@ -25,19 +24,21 @@ export async function fetchAllDecks() {
 } catch (err) {
   console.log(err);
 }
-  // if (decksStorage !== null) {
-  //   return JSON.parse(decksStorage);
-  // } else {
-  //   AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(dummyData));
-  //   return dummyData
-  //   // AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(dummyData));
-  //   // return dummyData;
+
+}
+export async function deleteDeckAS(deckId) {
+  console.log("deleteDeckAS", deckId)
+  // try {
+  //   const results = await AsyncStorage.getItem(DECKS_STORAGE_KEY);
+  //   const data = JSON.parse(results);
+  //   data[deckId] = undefined;
+  //   delete data[deckId];
+  //   AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(data));
+  // } catch (err) {
+  //   console.log(err);
   // }
 }
-
-
-// --------------------------------------------------------------------------------
-
+ 
 
 const dummyData = {
   Python: {
