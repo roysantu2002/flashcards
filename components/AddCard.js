@@ -11,13 +11,14 @@ import {
 import globalStyles from "../utils/globalStyles";
 import { textColor } from "../utils/colors";
 import { connect } from "react-redux";
+
 import { addCardToDeck } from "../actions/index";
 import { addCardToDeckAS } from "../utils/api";
 
 class AddCard extends Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired,
-    title: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     addCardToDeck: PropTypes.func.isRequired,
   };
   state = {
@@ -32,19 +33,8 @@ class AddCard extends Component {
     this.setState({ answer });
   };
 
-  // resetState = () => {
-  //   this.setState({
-  //     question: "",
-  //     answer: "",
-  //     showQuestionRequiredError: false,
-  //     showAnswerRequiredError: false,
-  //   });
-  // };
-
-  onSubmit = (deckId) => () => {
-    const { addCardToDeck, title, navigation } = this.props;
-
-    // const { addCard, goBack } = this.props;
+  onSubmit = () => () => {
+    const { addCardToDeck, id, navigation } = this.props;
     const { question, answer } = this.state;
 
     const questionNoWhitespace = question.replace(/\s/g, "");
@@ -74,15 +64,10 @@ class AddCard extends Component {
       question: this.state.question,
       answer: this.state.answer,
     };
-
-    addCardToDeck(title, card);
-    addCardToDeckAS(title, card);
-
+    addCardToDeck(id, card);
+    addCardToDeckAS(id, card);
     this.setState({ question: "", answer: "" });
-
     navigation.goBack();
-
-    this.resetState();
   };
 
   onQuestionChange = (value) => {
@@ -94,11 +79,11 @@ class AddCard extends Component {
   };
 
   render() {
-    const { deckId } = this.props.navigation.getParam("deckId");
+    const { id } = this.props
 
     return (
       <View style={{ flex: 1 }}>
-        <Text>{this.props.navigation.getParam("deckId")}</Text>
+        <Text>{this.props.navigation.getParam("id")}</Text>
         <View style={globalStyles.viewContainer}>
           <Text style={globalStyles.title}>Add Card</Text>
           <Text style={styles.tagline}>
@@ -132,7 +117,7 @@ class AddCard extends Component {
           )}
 
           <TouchableOpacity
-            onPress={this.onSubmit(this.props.title)}
+            onPress={this.onSubmit(this.props.id)}
             style={globalStyles.btnPrimary}
           >
             <Text style={globalStyles.btnPrimaryText}>Add card</Text>
@@ -157,10 +142,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state, { navigation }) => {
-  const title = navigation.getParam('title', 'undefined');
+  const { id } = navigation.state.params;
+  //const id = navigation.getParam('id', 'undefined');
 
   return {
-    title
+    id
   };
 };
 

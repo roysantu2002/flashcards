@@ -1,6 +1,7 @@
 export const decks = {
     CapitalCities: {
         title: 'Capital Cities',
+        id: 'CapitalCities',
         questions: [
           {
             question: 'What is the capital of Canada?',
@@ -22,6 +23,7 @@ export const decks = {
       },
       Python: {
         title: 'Python',
+        id: 'Python',
         questions: [
           {
             question: 'What is Python?',
@@ -31,6 +33,7 @@ export const decks = {
       },
       React: {
         title: 'React',
+        id: 'React',
         questions: [
           {
             question: 'What is React?',

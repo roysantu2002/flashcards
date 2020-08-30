@@ -61,7 +61,7 @@ class AddDeck extends Component {
         NavigationActions.navigate({ routeName: 'Decks' }),
         NavigationActions.navigate({
           routeName: 'Deck',
-          params: { deckId: title }
+          params: { id: titleNoWhitespace }
         })
       ]
     });

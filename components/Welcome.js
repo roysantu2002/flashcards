@@ -49,20 +49,19 @@ class Welcome extends Component {
 
   renderGridItem = (itemData) => {
 
-    console.log("render:", itemData.item.title)
+    // console.log("render:", itemData.item.title)
     // const itemData = this.state.itemData
     const title = itemData.item.title
     return (
       
       <DeckGrid
         title={itemData.item.title}
-        // created={itemData.item.created}
         flashcards={itemData.item.questions.length}
         onSelect={() => {
           this.props.navigation.navigate({
             routeName: "Deck",
             params: {
-              title: this.title,
+              id: itemData.item.id,
             },
           });
         }}
@@ -98,7 +97,7 @@ class Welcome extends Component {
     return (
 
       <FlatList
-        keyExtractor={(item, index) => item.title}
+        keyExtractor={(item, index) => item.id}
         data={decksList}
         renderItem={this.renderGridItem}
         numColumns={2}

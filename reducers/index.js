@@ -24,19 +24,20 @@ function decks(state = {}, action) {
         },
       };
     case ADD_CARD:
-      const { deckId, card } = action;
+      const { id, card } = action;
+      console.log("ADD_CARD reducer:", id )
       return {
         ...state,
-        [deckId]: {
-          ...state[deckId],
-          questions: [...state[deckId].questions].concat(card),
+        [id]: {
+          ...state[id],
+          questions: [...state[id].questions].concat(card),
         },
       };
 
     case DELETE_DECK:
-      const { id } = action;
+      const { deckId } = action;
       // return ({ [id]: value, ...remainingDecks } = state);
-      const { [id]: value, ...remainingDecks } = state;
+      const { [deckId]: value, ...remainingDecks } = state;
       // console.log(remainingDecks);
       return remainingDecks;
     

@@ -31,7 +31,7 @@ class Deck extends Component {
   handleStartQuiz = () => {
     const { deck, questionsCount } = this.props;
     const { navigate } = this.props.navigation;
-    const { title } = this.props.navigation.getParam("title")
+    const { id } = this.props
 
     if (questionsCount === 0) {
       this.setState({ showNoQuestionsError: true });
@@ -39,7 +39,7 @@ class Deck extends Component {
       navigate.navigation.navigate({
         routeName: "Quiz",
         params: {
-          title: title,
+          id: id,
         },
       });
     }
@@ -71,11 +71,11 @@ class Deck extends Component {
   };
 
   handleAddCard = () => {
-    // console.log("add:"+this.props.onSelect)
+    const { id } = this.props
     this.props.navigation.navigate({
       routeName: "AddCard",
       params: {
-        deckId: this.props.navigation.getParam("deckId"),
+        id: id,
       },
     });
   };
@@ -156,10 +156,15 @@ class Deck extends Component {
 
   render() {
 
-    console.log("Deck:", this.props)
-    const { deck } = this.props;
+    const { deck, decks, id } = this.props;
+    console.log("Deck:",this.props.id)
     const { showNoQuestionsError } = this.props;
     const {title} = this.props
+    let questionsCount = ""
+    try{
+        questionsCount = decks[id].questions.length
+    }
+    catch{questionsCount = 0}
 
     const startQuiz = (
 
@@ -174,9 +179,9 @@ class Deck extends Component {
     return (
       <View style={[globalStyles.viewContainer, { marginTop: 8 }]}>
         {/* <View> */}
-        <Text style={globalStyles.title}>{this.props.navigation.getParam("deckId")}</Text>
-        {this.props.questionsCount === 0 ? <Text style={globalStyles.cardCount}>No Cards Added</Text> :
-        <Text style={globalStyles.cardCount}>{this.props.questionsCount} cards</Text>}
+        <Text style={globalStyles.title}>{this.props.navigation.getParam("id")}</Text>
+        {questionsCount === 0 ? <Text style={globalStyles.cardCount}>No Cards Added</Text> :
+        <Text style={globalStyles.cardCount}>{questionsCount} cards</Text>}
         {/* </View> */}
         <TouchableOpacity
           onPress={this.handleAddCard}
@@ -231,14 +236,14 @@ const styles = StyleSheet.create({
 });
 
 
-const mapStateToProps = (decks, ownProps) => {
-  const { title } = ownProps.navigation.state.params;
-  const deck = decks[title];
+const mapStateToProps = (decks, { navigation }) => {
+  const { id } = navigation.state.params;
+  const deck = decks[id];
   return { 
-    decks, 
-    title,
-    questionsCount: decks[title].questions.length };
-    // questionsCount: decks[title].questions.length };
+    id,
+    decks,
+    deck}
+    // questionsCount: decks[id].questions.length };
     // questionsCount: decks[deckId].questions.length };
 };
 

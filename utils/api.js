@@ -37,12 +37,14 @@ export async function getDeck(deckId) {
 }
 
 export async function saveDeckTitleAS(title) {
+  const id = title.replace(/\s/g, '');
   try {
     await AsyncStorage.mergeItem(
       DECKS_STORAGE_KEY,
       JSON.stringify({
         [title]: {
           title,
+          id,
           questions: []
         }
       })
@@ -75,7 +77,7 @@ export async function removeDeckFromStorage(deckId) {
 export async function addCardToDeckAS(title, card) {
   try {
     const deck = await getDeck(title);
-
+    const id = title.replace(/\s/g, '');
     await AsyncStorage.mergeItem(
       DECKS_STORAGE_KEY,
       JSON.stringify({
