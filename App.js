@@ -17,6 +17,7 @@ import reducer from './reducers';
 import middleware from './middleware';
 import { receiveDecks } from './actions/index';
 import decks from "./reducers";
+import { setLocalNotification } from './utils/helpers';
 
 // import * as Font from 'expo-font'
 
@@ -36,7 +37,7 @@ export default class App extends React.Component {
 
   async componentDidMount() {
 
-    // await setLocalNotification();
+    await setLocalNotification()
 
     const loadDecksPromise = fetchAllDecks();
 

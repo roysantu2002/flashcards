@@ -60,7 +60,7 @@ class Deck extends Component {
 
     deleteDeck(id)
     deleteDeckAS(id)
-    navigation.goBack()
+    navigation.navigate("Decks");
 
   };
 
@@ -184,16 +184,15 @@ class Deck extends Component {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => this.handleDeleteDeck()}
+          onPress={() => this.handleDelete()}
           style={globalStyles.btnSecondary}
         >
           <Text style={globalStyles.btnSecondaryText}>Delete Card</Text>
         </TouchableOpacity> 
-        {/* {/* <Text>{this.props.questionsCount}</Text>
 
         {this.props.questionsCount !==0 ? startQuiz : 
           <Text style={globalStyles.inputErrorText}>Add one or more cards before taking the quiz</Text>
-        } */}
+        }
 
       </View>
 
