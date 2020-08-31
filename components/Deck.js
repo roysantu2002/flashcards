@@ -9,7 +9,7 @@ import {
   Alert
 } from "react-native";
 import { connect } from "react-redux";
-import { removeDeckFromStorage } from '../utils/api'
+import { deleteDeckAS } from '../utils/api'
 import { deleteDeck } from '../actions/index'
 import { white } from "../utils/colors";
 import globalStyles from "../utils/globalStyles";
@@ -54,20 +54,14 @@ class Deck extends Component {
   // };
 
   handleDelete = () => {
-    const { deck, questionsCount } = this.props;
-    const { navigate } = this.props.navigation;
-    const { deckId } = this.props.navigation.getParam("deckId")
-    const { removeDeck, navigation } = this.props;
+  
+    const { deleteDeck, navigation } = this.props
+    const { id } = this.props
 
-    deleteDeck(deckId)
-    deleteDeckAS(deckId)
-    this.props.navigation.goBack()
-  //   this.props.navigation.navigate({
-  //     routeName: "AddCard",
-  //     params: {
-  //       deckId: this.props.navigation.getParam("deckId"),
-  //     },
-  //   });
+    deleteDeck(id)
+    deleteDeckAS(id)
+    navigation.goBack()
+
   };
 
   handleAddCard = () => {
@@ -81,21 +75,20 @@ class Deck extends Component {
   };
 
   handleDeleteDeck = () => {
-    // delete deck, then go back
-    // const { deckId } = this.props.navigation.state.params;
-    const { deck, navigation } = this.props;
+    const { deleteDeck, navigation } = this.props
+    const { id } = this.props
 
     Alert.alert(
       "Delete Deck",
-      `Are you sure you want to delete the deck ${deck.title}?`,
+      `Are you sure you want to delete the deck ${id}?`,
       [
         { text: "Cancel" },
         {
           text: "OK",
           onPress: async () => {
-            const { deleteDeck } = this.props;
-            await removeDeckFromStorage(deck.title);
-            deleteDeck(deck.title);
+          
+            await deleteDeckAS(id)
+            deleteDeck(id);
             navigation.navigate("Decks");
           }
         }

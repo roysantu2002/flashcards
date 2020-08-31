@@ -5,7 +5,7 @@ import {
   DELETE_DECK,
   RESET_STORE,
 } from "../actions";
-import { decks as INITIAL_STATE } from "../utils/api";
+import { decks as INITIAL_STATE } from '../utils/_Data'
 
 function decks(state = {}, action) {
   switch (action.type) {
@@ -36,9 +36,7 @@ function decks(state = {}, action) {
 
     case DELETE_DECK:
       const { deckId } = action;
-      // return ({ [id]: value, ...remainingDecks } = state);
       const { [deckId]: value, ...remainingDecks } = state;
-      // console.log(remainingDecks);
       return remainingDecks;
     
       case RESET_STORE:
