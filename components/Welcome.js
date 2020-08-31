@@ -92,16 +92,30 @@ class Welcome extends Component {
     const decksList =  Object.keys(decks)
                       .map((key) => decks[key])
 
-    console.log("decksList", decksList)
+    const flatList =   
+          <FlatList
+          keyExtractor={(item, index) => item.id}
+          data={decksList}
+          renderItem={this.renderGridItem}
+          numColumns={2}
+        />
 
+    const noList = <View style={styles.gridItem}>
+      <View
+        style={{ ...styles.container, ...{ backgroundColor: 'white' } }}
+      >
+        <Text style={styles.title} numberOfLines={1}>
+          Add Deck
+        </Text>
+      </View>
+  </View>
+
+    let showList = ""
+
+    if(decksList.length ===  0 ? showList= noList : showList=flatList) 
+ 
     return (
-
-      <FlatList
-        keyExtractor={(item, index) => item.id}
-        data={decksList}
-        renderItem={this.renderGridItem}
-        numColumns={2}
-      />
+      showList
     );
   }
 }
@@ -117,6 +131,24 @@ const styles = StyleSheet.create({
     margin: 15,
     height: 150,
   },
+  container: {
+    flex: 1,
+    borderRadius: 10,
+    shadowColor: '#FB005B',
+    shadowOpacity: 0.16,
+    shadowOffset: { width: 2, height: 2 },
+    shadowRadius: 10,
+    elevation: 3,
+    padding: 15,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  title: {
+    color: '#FB005B',
+    fontFamily: 'open-sans-bold',
+    fontSize: 20,
+    textAlign: 'center'
+  },
 });
 
 
@@ -126,17 +158,3 @@ export default connect(
   mapStateToProps,
   { handleInitialData }
 )(Welcome);
-
-// function mapStateToProps(decks) {
-//   const CATEGORIES = Object.keys(decks)
-//     .map((key) => decks[key])
-//     .sort((a, b) => b.timestamp - a.timestamp);
-
-//   return {
-//     CATEGORIES,
-//   };
-// }
-
-// export default connect(mapStateToProps)(Welcome);
-
-// export default Welcome;

@@ -29,14 +29,19 @@ class Deck extends Component {
   // };
 
   handleStartQuiz = () => {
-    const { deck, questionsCount } = this.props;
-    const { navigate } = this.props.navigation;
-    const { id } = this.props
+    const { deleteDeck, navigation } = this.props
+    const { id, decks } = this.props
+    let questionsCount
+
+    try{
+        questionsCount = decks[id].questions.length
+    }
+    catch{questionsCount = 0}
 
     if (questionsCount === 0) {
       this.setState({ showNoQuestionsError: true });
     } else {
-      navigate.navigation.navigate({
+      navigation.navigate({
         routeName: "Quiz",
         params: {
           id: id,
@@ -190,8 +195,8 @@ class Deck extends Component {
           <Text style={globalStyles.btnSecondaryText}>Delete Card</Text>
         </TouchableOpacity> 
 
-        {this.props.questionsCount !==0 ? startQuiz : 
-          <Text style={globalStyles.inputErrorText}>Add one or more cards before taking the quiz</Text>
+        {questionsCount !==0 ? startQuiz : 
+          <Text style={globalStyles.inputErrorText}>Add one or more cards, and begin quiz</Text>
         }
 
       </View>

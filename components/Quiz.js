@@ -83,11 +83,11 @@ class Quiz extends Component {
 }
 
 function mapStateToProps(decks, { navigation }) {
-  const { deckId } = navigation.state.params;
+  const { id, questions } = navigation.state.params;
 
   return {
-    deckId,
-    questions: decks[deckId].questions
+    id,
+    questions: decks[id].questions
   };
 }
 
