@@ -2,32 +2,22 @@ import React from "react";
 import { View, Platform, StatusBar, Text, StyleSheet } from "react-native";
 import AppLoading from './screens/AppLoading'
 import {Router, Scene} from 'react-native-router-flux';
-import { createAppContainer } from "react-navigation";
-import { createBottomTabNavigator } from "react-navigation-tabs";
-import { FontAwesome, Ionicons } from "@expo/vector-icons";
+// import { createAppContainer } from "react-navigation";
+// import { createBottomTabNavigator } from "react-navigation-tabs";
+// import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import * as Font from 'expo-font';
-// import { Constants } from "expo";
+import { openSansBold, openSansRegular } from './utils/fonts';
 import FlashCardsNav from './navigation/FlashCardsNav'
-import FlashCardsStack from './navigation/FlashCardsStack'
-import Welcome from "./components/Welcome"
+// import FlashCardsStack from './navigation/FlashCardsStack'
+// import Welcome from "./components/Welcome"
 import { fetchAllDecks } from './utils/api';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
 import middleware from './middleware';
 import { receiveDecks } from './actions/index';
-import decks from "./reducers";
+// import decks from "./reducers";
 import { setLocalNotification } from './utils/helpers';
-
-// import * as Font from 'expo-font'
-
-// const fetchFonts = () => {
-//   return Font.loadAsync({
-//     'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
-//     'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf')
-//   });
-// };
-
 
 export default class App extends React.Component {
  
@@ -42,10 +32,8 @@ export default class App extends React.Component {
     const loadDecksPromise = fetchAllDecks();
 
     const loadFontsPromise = Font.loadAsync({
-      // [robotoRegular]: require('./assets/fonts/OpenSans-Bold.ttf'),
-      // [robotoMedium]: require('./assets/fonts/OpenSans-Regular.ttf')
-      'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
-      'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf')
+      [openSansBold]: require('./assets/fonts/OpenSans-Bold.ttf'),
+      [openSansRegular]: require('./assets/fonts/OpenSans-Regular.ttf')
     });
 
     Promise.all([loadDecksPromise, loadFontsPromise])
@@ -57,16 +45,12 @@ export default class App extends React.Component {
           toLoaded: true
         });
       });
-
-      // console.log(decks.map(deck => (deck.id)))
   }
   
   render() {
 
-  
     return (
-     
-    //  <FlashCardsStack/>
+
     <Provider store={this.store}>
       <Router>
       <Scene key="root">

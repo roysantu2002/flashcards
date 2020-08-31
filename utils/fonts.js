@@ -1,2 +1,2 @@
-// export const robotoRegular = 'roboto-regular';
-// export const robotoMedium = 'roboto-medium';
+export const openSansBold = 'OpenSans-Bold'
+export const openSansRegular = 'OpenSans-Regular'

@@ -8,6 +8,7 @@ import {
   Platform,
   TouchableNativeFeedback
 } from 'react-native';
+import styles from "../utils/globalStyles";
 
 const DeckGrid = props => {
   let TouchableCmp = TouchableOpacity;
@@ -44,37 +45,37 @@ const DeckGrid = props => {
 //   allowNavigation: PropTypes.bool
 // };
 
-const styles = StyleSheet.create({
-  gridItem: {
-    flex: 1,
-    margin: 15,
-    height: 150,
-    borderRadius: 10,
-    overflow: 'hidden'
-  },
-  container: {
-    flex: 1,
-    borderRadius: 10,
-    shadowColor: '#FB005B',
-    shadowOpacity: 0.16,
-    shadowOffset: { width: 2, height: 2 },
-    shadowRadius: 10,
-    elevation: 3,
-    padding: 15,
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  title: {
-    color: '#FB005B',
-    fontFamily: 'open-sans-bold',
-    fontSize: 15,
-    textAlign: 'center'
-  },
-  created: {
-    fontFamily: 'open-sans-bold',
-    fontSize: 11,
-    textAlign: 'center'
-  }
-});
+// const styles = StyleSheet.create({
+//   gridItem: {
+//     flex: 1,
+//     margin: 15,
+//     height: 150,
+//     borderRadius: 10,
+//     overflow: 'hidden'
+//   },
+//   container: {
+//     flex: 1,
+//     borderRadius: 10,
+//     shadowColor: '#FB005B',
+//     shadowOpacity: 0.16,
+//     shadowOffset: { width: 2, height: 2 },
+//     shadowRadius: 10,
+//     elevation: 3,
+//     padding: 15,
+//     justifyContent: 'space-between',
+//     alignItems: 'center'
+//   },
+//   title: {
+//     color: '#FB005B',
+//     fontFamily: 'open-sans-bold',
+//     fontSize: 15,
+//     textAlign: 'center'
+//   },
+//   created: {
+//     fontFamily: 'open-sans-bold',
+//     fontSize: 11,
+//     textAlign: 'center'
+//   }
+// });
 
 export default DeckGrid;

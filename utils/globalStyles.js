@@ -1,27 +1,33 @@
 import { StyleSheet } from 'react-native';
 import { bgDarkPink, textColor, textRed, white } from './colors';
-import { robotoMedium, robotoRegular } from './fonts';
+import { openSansBold, openSansRegular} from './fonts';
 
 const globalStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FB005B',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logoText: {
+    color: '#FFFFFF',
+    fontSize: 30,
+    marginTop: 29.1,
+    fontWeight: '300',
+  },
   viewContainer: {
     flex: 1,
     marginTop: "20%",
     marginLeft: 16,
     marginRight: 16,
     flexDirection: 'column',
-    // justifyContent: 'center',
-    // alignItems: 'flex-start'
-    
   },
   title: {
     marginTop: "15%",
-    // marginBottom: "60%",
     textAlign: "center",
     fontSize: 30,
-    fontFamily: robotoMedium,
+    fontFamily: openSansBold,
     color: textColor,
-    
-   
   },
   cardCount: {
     fontSize: 15,
@@ -47,13 +53,13 @@ const globalStyles = StyleSheet.create({
   btnPrimaryText: {
     color: white,
     fontSize: 14,
-    fontFamily: robotoMedium,
+    fontFamily: openSansRegular,
     textTransform: 'uppercase'
   },
   btnSecondaryText: {
     color: bgDarkPink,
     fontSize: 14,
-    fontFamily: robotoMedium,
+    fontFamily: openSansRegular,
     textTransform: 'uppercase'
   },
   textInput: {
@@ -64,15 +70,73 @@ const globalStyles = StyleSheet.create({
     paddingLeft: 12,
     paddingRight: 12,
     fontSize: 16,
-    fontFamily: robotoRegular
+    fontFamily: openSansRegular
   },
   inputErrorText: {
     marginTop: 10,
     marginBottom: 4,
     color: textRed,
     fontSize: 14,
-    fontFamily: robotoMedium,
+    fontFamily: openSansRegular
+  },
+  screen: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  gridItem: {
+    flex: 1,
+    margin: 15,
+    height: 150,
+  },
+  container: {
+    flex: 1,
+    borderRadius: 10,
+    shadowColor: '#FB005B',
+    shadowOpacity: 0.16,
+    shadowOffset: { width: 2, height: 2 },
+    shadowRadius: 10,
+    elevation: 3,
+    padding: 15,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  gridItem: {
+    flex: 1,
+    margin: 15,
+    height: 150,
+    borderRadius: 10,
+    overflow: 'hidden'
+  },
+  container: {
+    flex: 1,
+    borderRadius: 10,
+    shadowColor: '#FB005B',
+    shadowOpacity: 0.16,
+    shadowOffset: { width: 2, height: 2 },
+    shadowRadius: 10,
+    elevation: 3,
+    padding: 15,
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  title: {
+    color: '#FB005B',
+    fontFamily: openSansBold,
+    fontSize: 15,
+    textAlign: 'center'
+  },
+  created: {
+    fontFamily: openSansBold,
+    fontSize: 11,
+    textAlign: 'center'
   }
+  // title: {
+  //   color: '#FB005B',
+  //   fontFamily: 'open-sans-bold',
+  //   fontSize: 20,
+  //   textAlign: 'center'
+  // },
 });
 
 export default globalStyles;

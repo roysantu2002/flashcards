@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
-
+import styles from "../utils/globalStyles";
 import { handleInitialData } from '../actions/index';
 // import { CATEGORIES } from '../data/dummy-data';
 import DeckGrid from "./DeckGrid";
@@ -120,36 +120,36 @@ class Welcome extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  gridItem: {
-    flex: 1,
-    margin: 15,
-    height: 150,
-  },
-  container: {
-    flex: 1,
-    borderRadius: 10,
-    shadowColor: '#FB005B',
-    shadowOpacity: 0.16,
-    shadowOffset: { width: 2, height: 2 },
-    shadowRadius: 10,
-    elevation: 3,
-    padding: 15,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  title: {
-    color: '#FB005B',
-    fontFamily: 'open-sans-bold',
-    fontSize: 20,
-    textAlign: 'center'
-  },
-});
+// const styles = StyleSheet.create({
+//   screen: {
+//     flex: 1,
+//     justifyContent: "center",
+//     alignItems: "center",
+//   },
+//   gridItem: {
+//     flex: 1,
+//     margin: 15,
+//     height: 150,
+//   },
+//   container: {
+//     flex: 1,
+//     borderRadius: 10,
+//     shadowColor: '#FB005B',
+//     shadowOpacity: 0.16,
+//     shadowOffset: { width: 2, height: 2 },
+//     shadowRadius: 10,
+//     elevation: 3,
+//     padding: 15,
+//     justifyContent: 'center',
+//     alignItems: 'center'
+//   },
+//   title: {
+//     color: '#FB005B',
+//     fontFamily: 'open-sans-bold',
+//     fontSize: 20,
+//     textAlign: 'center'
+//   },
+// });
 
 
 const mapStateToProps = state => ({ decks: state });

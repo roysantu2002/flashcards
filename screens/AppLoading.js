@@ -3,13 +3,13 @@ import {
   View,
   Image,
   Text,
-  StyleSheet,
   Animated,
   ActivityIndicator,
+  StyleSheet
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
-/* Logo */
 import Logo from '../images/Flash.png'
+// import styles from '../utils/globalStyles'
 
 const switchToAuth = () => {
   Actions.replace('nav')
@@ -86,7 +86,6 @@ const styles = StyleSheet.create({
   },
   logoText: {
     color: '#FFFFFF',
-    // fontFamily: 'GoogleSans-Bold',
     fontSize: 30,
     marginTop: 29.1,
     fontWeight: '300',
