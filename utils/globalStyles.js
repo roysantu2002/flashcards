@@ -148,6 +148,57 @@ const globalStyles = StyleSheet.create({
         fontSize: 20,
         fontFamily: openSansBold,
         color: textColor
+  },
+  largeText: {
+    marginTop: 8,
+    marginBottom: 20,
+    fontSize: 20,
+    fontFamily: openSansRegular,
+    color: textColor
+  },
+  smallText: {
+    marginTop: 8,
+    marginBottom: 20,
+    fontSize: 16,
+    fontFamily: openSansRegular,
+    color: textColor
+  },
+  heading: {
+    marginTop: 8,
+    fontSize: 32,
+    fontFamily: openSansRegular,
+    color: textColor
+  },
+  btnSuccess: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 8,
+    height: 50,
+    borderRadius: 10,
+    backgroundColor: '#28A745'
+  },
+  btnError: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 8,
+    height: 50,
+    borderRadius: 10,
+    backgroundColor: '#DC3545'
+  },
+  btnSuccessText: {
+    color: white,
+    fontSize: 14,
+    fontFamily: openSansRegular,
+    textTransform: 'uppercase'
+  },
+  btnErrorText: {
+    color: white,
+    fontSize: 14,
+    fontFamily: openSansRegular,
+    textTransform: 'uppercase'
+  },
+  buttonsContainer: {
+    flexDirection: 'row'
   }
 });
 

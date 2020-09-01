@@ -21,7 +21,6 @@ export function addDeck(title) {
 }
 
 export function addCardToDeck(id, card) {
-  console.log("addCardToDeck", id, card)
   return {
     type: ADD_CARD,
     id,
@@ -51,8 +50,8 @@ export function handleInitialData() {
   };
 }
 
-export function resetStore() {
-  return {
-    type: RESET_STORE
-  };
-}
+// export function resetStore() {
+//   return {
+//     type: RESET_STORE
+//   };
+// }

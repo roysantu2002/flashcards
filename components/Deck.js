@@ -82,7 +82,6 @@ class Deck extends Component {
   render() {
 
     const { deck, decks, id } = this.props;
-    console.log("Deck:",this.props.id)
     const { showNoQuestionsError } = this.props;
     const {title} = this.props
     let questionsCount = ""
@@ -129,15 +128,6 @@ class Deck extends Component {
     );
   }
 }
-
-// const styles = StyleSheet.create({
-//   screen: {
-//     flex: 1,
-//     justifyContent: "center",
-//     alignItems: "center",
-//   },
-// });
-
 
 const mapStateToProps = (decks, { navigation }) => {
   const { id } = navigation.state.params;

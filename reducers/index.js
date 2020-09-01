@@ -3,7 +3,7 @@ import {
   ADD_DECK,
   ADD_CARD,
   DELETE_DECK,
-  RESET_STORE,
+  // RESET_STORE,
 } from "../actions";
 import { decks as INITIAL_STATE } from '../utils/_Data'
 
@@ -25,7 +25,6 @@ function decks(state = {}, action) {
       };
     case ADD_CARD:
       const { id, card } = action;
-      console.log("ADD_CARD reducer:", id )
       return {
         ...state,
         [id]: {
@@ -39,8 +38,8 @@ function decks(state = {}, action) {
       const { [deckId]: value, ...remainingDecks } = state;
       return remainingDecks;
     
-      case RESET_STORE:
-        return INITIAL_STATE;
+      // case RESET_STORE:
+      //   return INITIAL_STATE;
 
     default:
       return state;
