@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View } from 'react-native';
-import globalStyles from '../utils/globalStyles';
-// import { clearLocalNotification, setLocalNotification } from '../utils/notificationHelper';
-
-// import CustomStatusBar from '../components/CustomStatusBar';
-// import QuizHeader from '../components/QuizHeader';
+import Styles from '../utils/globalStyles';
 import Question from '../components/Question';
 import QuizResults from '../components/QuizResults';
+import { setLocalNotification, clearLocalNotification } from '../utils/helpers';
+
 
 class Quiz extends Component {
 
@@ -16,6 +14,10 @@ class Quiz extends Component {
     answeredCorrectly: 0,
     quizComplete: false
   };
+
+  componentDidMount() {
+    clearLocalNotification().then(setLocalNotification);
+  }
 
   handleQuestionAnswered = async (answeredCorrectly) => {
 
@@ -28,10 +30,6 @@ class Quiz extends Component {
     if (isQuizComplete) {
 
       this.setState({quizComplete: true});
-
-      // await clearLocalNotification();
-      // await setLocalNotification();
-
     } else {
       this.setState({currentQuestionIndex: this.state.currentQuestionIndex + 1});
     }
@@ -53,15 +51,7 @@ class Quiz extends Component {
 
     return (
       <View style={{flex: 1}}>
-
-        {/* <CustomStatusBar /> */}
-
-        <View style={globalStyles.viewContainer}>
-
-          {/* <QuizHeader
-            currentQuestionIndex={currentQuestionIndex}
-            totalQuestions={questions.length} /> */}
-
+        <View style={Styles.addContainer}>
           {quizComplete
             ? <QuizResults
                 questionsAnsweredCorrectly={answeredCorrectly}

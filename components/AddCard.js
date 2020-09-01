@@ -8,7 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import globalStyles from "../utils/globalStyles";
+import Styles from "../utils/globalStyles";
 import { textColor } from "../utils/colors";
 import { connect } from "react-redux";
 
@@ -83,44 +83,43 @@ class AddCard extends Component {
 
     return (
       <View style={{ flex: 1 }}>
-        <Text>{this.props.navigation.getParam("id")}</Text>
-        <View style={globalStyles.viewContainer}>
-          <Text style={globalStyles.title}>Add Card</Text>
-          <Text style={styles.tagline}>
+        <View style={Styles.addContainer}>
+          <Text style={Styles.title}>Add Card</Text>
+          <Text style={Styles.tagline}>
             Add a new card to the deck of flashcards
           </Text>
 
-          <Text style={styles.label}>Your question</Text>
+          <Text style={Styles.label}>Your question</Text>
           <TextInput
             value={this.state.question}
             onChangeText={this.onQuestionChange}
-            style={globalStyles.textInput}
+            style={Styles.textInput}
           />
 
           {this.state.showQuestionRequiredError && (
-            <Text style={globalStyles.inputErrorText}>
+            <Text style={Styles.inputErrorText}>
               Please enter your question
             </Text>
           )}
 
-          <Text style={styles.label}>The answer</Text>
+          <Text style={Styles.label}>The answer</Text>
           <TextInput
             value={this.state.answer}
             onChangeText={this.onAnswerChange}
-            style={globalStyles.textInput}
+            style={Styles.textInput}
           />
 
           {this.state.showAnswerRequiredError && (
-            <Text style={globalStyles.inputErrorText}>
+            <Text style={Styles.inputErrorText}>
               Please enter the answer
             </Text>
           )}
 
           <TouchableOpacity
             onPress={this.onSubmit(this.props.id)}
-            style={globalStyles.btnPrimary}
+            style={Styles.btnPrimary}
           >
-            <Text style={globalStyles.btnPrimaryText}>Add card</Text>
+            <Text style={Styles.btnPrimaryText}>Add card</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -128,18 +127,18 @@ class AddCard extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  tagline: {
-    color: textColor,
-    fontSize: 16,
-  },
-  label: {
-    marginTop: 32,
-    marginBottom: 4,
-    fontSize: 16,
-    // fontFamily: robotoMedium
-  },
-});
+// const styles = StyleSheet.create({
+//   tagline: {
+//     color: textColor,
+//     fontSize: 16,
+//   },
+//   label: {
+//     marginTop: 32,
+//     marginBottom: 4,
+//     fontSize: 16,
+//     // fontFamily: robotoMedium
+//   },
+// });
 
 const mapStateToProps = (state, { navigation }) => {
   const { id } = navigation.state.params;

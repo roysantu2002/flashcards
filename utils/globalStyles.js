@@ -15,9 +15,9 @@ const globalStyles = StyleSheet.create({
     marginTop: 29.1,
     fontWeight: '300',
   },
-  viewContainer: {
+  addContainer: {
     flex: 1,
-    marginTop: "20%",
+    marginTop: "40%",
     marginLeft: 16,
     marginRight: 16,
     flexDirection: 'column',
@@ -122,6 +122,7 @@ const globalStyles = StyleSheet.create({
   },
   title: {
     color: '#FB005B',
+    marginBottom: 20,
     fontFamily: openSansBold,
     fontSize: 15,
     textAlign: 'center'
@@ -130,13 +131,24 @@ const globalStyles = StyleSheet.create({
     fontFamily: openSansBold,
     fontSize: 11,
     textAlign: 'center'
+  },
+  tagline: {
+    color: textColor,
+    fontSize: 16
+  },
+  label:{
+    marginTop: 32,
+    marginBottom: 4,
+    fontSize: 16,
+    fontFamily: openSansBold
+  },
+  largeText: {
+        marginTop: 8,
+        marginBottom: 20,
+        fontSize: 20,
+        fontFamily: openSansBold,
+        color: textColor
   }
-  // title: {
-  //   color: '#FB005B',
-  //   fontFamily: 'open-sans-bold',
-  //   fontSize: 20,
-  //   textAlign: 'center'
-  // },
 });
 
 export default globalStyles;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Text, View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-import globalStyles from '../utils/globalStyles';
+import styles from '../utils/globalStyles'
 import { textColor } from '../utils/colors';
 // import { robotoMedium } from '../utils/fonts';
 // import CustomStatusBar from '../components/CustomStatusBar';
@@ -28,21 +28,13 @@ class AddDeck extends Component {
 
   onSubmit = () => {
 
-    // const { decks, addDeck, goToDecks } = this.props;
-    // const { title } = this.state;
-
     const { decks, addDeck, navigation } = this.props;
     const { title } = this.state;
-
     const titleNoWhitespace = title.replace(/\s/g, '');
-
-    // Check that a title has been entered
     if (!titleNoWhitespace.length) {
       this.setState({ showRequiredInputError: true, showUniqueNameError: false });
       return;
     }
-
-    // Check that the title is not already in use
     const titleAlreadyUsed = Object.keys(decks).some(key => {
       const deck = decks[key];
       return deck.title === title;
@@ -52,7 +44,6 @@ class AddDeck extends Component {
       this.setState({ showRequiredInputError: false, showUniqueNameError: true });
       return;
     }
-
     addDeck(title)
     saveDeckTitleAS(title)
     const resetAction = StackActions.reset({
@@ -67,33 +58,27 @@ class AddDeck extends Component {
     });
     navigation.dispatch(resetAction);
 
-    this.setState(() => ({ text: '' }));
+    this.setState(() => ({ title: '' }));
   };
   
   render() {
     return (
       <View style={{flex: 1}}>
-
-        {/* <CustomStatusBar /> */}
-
-        <View style={globalStyles.viewContainer}>
-          <Text style={globalStyles.title}>Add Deck</Text>
+        <View style={styles.addContainer}>
+          <Text style={styles.title}>Add Deck</Text>
           <Text style={styles.tagline}>Create a flashcards deck</Text>
-
           <Text style={styles.label}>Deck Title</Text>
-          <TextInput value={this.state.title} onChangeText={this.onTitleChange} style={globalStyles.textInput} />
-
-
+          <TextInput value={this.state.title} onChangeText={this.onTitleChange} style={styles.textInput} />
           {this.state.showRequiredInputError && (
-            <Text style={globalStyles.inputErrorText}>Please enter a title</Text>
+            <Text style={styles.inputErrorText}>Please enter a title</Text>
           )}
 
           {this.state.showUniqueNameError && (
-            <Text style={globalStyles.inputErrorText}>This title has already been used</Text>
+            <Text style={styles.inputErrorText}>This title has already been used</Text>
           )}
 
-          <TouchableOpacity onPress={this.onSubmit} style={globalStyles.btnPrimary}>
-            <Text style={globalStyles.btnPrimaryText}>Create Deck</Text>
+          <TouchableOpacity onPress={this.onSubmit} style={styles.btnPrimary}>
+            <Text style={styles.btnPrimaryText}>Create Deck</Text>
           </TouchableOpacity>
 
         </View>
@@ -115,15 +100,15 @@ export default connect(
 )(AddDeck);
 
 
-const styles = StyleSheet.create({
-  tagline: {
-    color: textColor,
-    fontSize: 16
-  },
-  label:{
-    marginTop: 32,
-    marginBottom: 4,
-    fontSize: 16,
-    // fontFamily: robotoMedium
-  }
-});
+// const styles = StyleSheet.create({
+//   tagline: {
+//     color: textColor,
+//     fontSize: 16
+//   },
+//   label:{
+//     marginTop: 32,
+//     marginBottom: 4,
+//     fontSize: 16,
+//     // fontFamily: robotoMedium
+//   }
+// });
