@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Styles from '../utils/globalStyles';
-// import { robotoMedium } from '../utils/fonts';
-// import { textColor } from '../utils/colors';
 
 function QuizResults(props) {
 
@@ -32,15 +30,5 @@ function QuizResults(props) {
     </View>
   );
 }
-
-// const styles = StyleSheet.create({
-//   largeText: {
-//     marginTop: 8,
-//     marginBottom: 20,
-//     fontSize: 20,
-//     fontFamily: robotoMedium,
-//     color: textColor
-//   }
-// });
 
 export default QuizResults;

@@ -41,10 +41,31 @@ This will open Expo Developer Tools in the browser.  You can then do one of the 
 
 - Use your device to test:
 
-    Scan the QR Code using the Expo Client app ([Expo Client for Android & iOS](https://expo.io/tools#client))  from an Android or iOS device.
+    Scan the QR Code using the Expo Client app ([Expo Client for Android & iOS](https://expo.io/)  from an Android or iOS device.
+
 - Use an Android Emulator or iOS Simulator to run the app:
-    - [iOS Simulator Setup](https://docs.expo.io/versions/v33.0.0/introduction/installation/#ios-simulator)
-    - [Android Emulator Setup](https://docs.expo.io/versions/v33.0.0/introduction/installation/#android-emulator)
+
+# Components
+- Welcome.js
+- QuizResults.js
+- Quiz.js
+- Question.js
+- DeckGrid.js
+- Deck.js
+- AddDeck.js
+- AddCard.js
+
+# screens
+- AppLoading.js
+
+# utils
+- helpers.js
+- globalStyles.js
+- fonts.js
+- colors.js
+- api.js
+- _Data.js
+
 
 ## Testing
 

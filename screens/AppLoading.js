@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import Logo from '../images/Flash.png'
-// import styles from '../utils/globalStyles'
 
 const switchToAuth = () => {
   Actions.replace('nav')
