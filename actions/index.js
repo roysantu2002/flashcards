@@ -14,9 +14,12 @@ export function receiveDecks(decks) {
 }
 
 export function addDeck(title) {
+  const id = title.replace(/\s/g, '');
   return {
     type: ADD_DECK,
-    title
+    title,
+    id
+
   };
 }
 
@@ -28,12 +31,12 @@ export function addCardToDeck(id, card) {
   };
 }
 
-export function addCard(questionDetails) {
-  return {
-    type: ADD_CARD,
-    questionDetails
-  };
-}
+// export function addCard(questionDetails) {
+//   return {
+//     type: ADD_CARD,
+//     questionDetails
+//   };
+// }
 
 export function deleteDeck(deckId) {
   return {

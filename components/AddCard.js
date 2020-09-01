@@ -16,11 +16,11 @@ import { addCardToDeck } from "../actions/index";
 import { addCardToDeckAS } from "../utils/api";
 
 class AddCard extends Component {
-  static propTypes = {
-    navigation: PropTypes.object.isRequired,
-    id: PropTypes.string.isRequired,
-    addCardToDeck: PropTypes.func.isRequired,
-  };
+  // static propTypes = {
+  //   navigation: PropTypes.object.isRequired,
+  //   id: PropTypes.string.isRequired,
+  //   addCardToDeck: PropTypes.func.isRequired,
+  // };
   state = {
     question: "",
     answer: "",
@@ -34,7 +34,8 @@ class AddCard extends Component {
   };
 
   onSubmit = () => () => {
-    const { addCardToDeck, id, navigation } = this.props;
+    const id = this.props.navigation.getParam('id')
+    const { addCardToDeck, navigation } = this.props;
     const { question, answer } = this.state;
 
     const questionNoWhitespace = question.replace(/\s/g, "");
@@ -63,7 +64,10 @@ class AddCard extends Component {
     const card = {
       question: this.state.question,
       answer: this.state.answer,
-    };
+    }
+
+    // console("Add Card: ", id, card)
+
     addCardToDeck(id, card);
     addCardToDeckAS(id, card);
     this.setState({ question: "", answer: "" });
@@ -79,12 +83,11 @@ class AddCard extends Component {
   };
 
   render() {
-    const { id } = this.props
-
+    // console.log("Add Card:", this.props.navigation.getParam('id'))
     return (
       <View style={{ flex: 1 }}>
         <View style={Styles.addContainer}>
-          <Text style={Styles.title}>Add Card</Text>
+          <Text style={Styles.title}>{this.props.navigation.getParam('id')}</Text>
           <Text style={Styles.tagline}>
             Add a new card to the deck of flashcards
           </Text>
@@ -116,7 +119,7 @@ class AddCard extends Component {
           )}
 
           <TouchableOpacity
-            onPress={this.onSubmit(this.props.id)}
+            onPress={this.onSubmit()}
             style={Styles.btnPrimary}
           >
             <Text style={Styles.btnPrimaryText}>Add card</Text>
@@ -127,27 +130,18 @@ class AddCard extends Component {
   }
 }
 
-// const styles = StyleSheet.create({
-//   tagline: {
-//     color: textColor,
-//     fontSize: 16,
-//   },
-//   label: {
-//     marginTop: 32,
-//     marginBottom: 4,
-//     fontSize: 16,
-//     // fontFamily: robotoMedium
-//   },
-// });
 
-const mapStateToProps = (state, { navigation }) => {
-  const { id } = navigation.state.params;
-  //const id = navigation.getParam('id', 'undefined');
+// const mapStateToProps = (decks, state, { navigation }) => {
+//   const { id } = navigation.state.params;
+ 
+//   return {
+//     id,
+//     state,
+//     decks
+//   };
+// };
 
-  return {
-    id
-  };
-};
+const mapStateToProps = state => ({ decks: state});
 
 export default connect(
   mapStateToProps,

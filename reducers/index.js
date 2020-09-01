@@ -3,9 +3,8 @@ import {
   ADD_DECK,
   ADD_CARD,
   DELETE_DECK,
-  // RESET_STORE,
 } from "../actions";
-import { decks as INITIAL_STATE } from '../utils/_Data'
+
 
 function decks(state = {}, action) {
   switch (action.type) {
@@ -16,15 +15,19 @@ function decks(state = {}, action) {
       };
     case ADD_DECK:
       const { title } = action;
+      const key = title.replace(/\s/g, '');
       return {
         ...state,
-        [title]: {
+        [key]: {
           title,
+          key,
           questions: [],
         },
       };
     case ADD_CARD:
       const { id, card } = action;
+
+      console.log("ADD_Card Reducer:", id, card)
       return {
         ...state,
         [id]: {
@@ -37,9 +40,6 @@ function decks(state = {}, action) {
       const { deckId } = action;
       const { [deckId]: value, ...remainingDecks } = state;
       return remainingDecks;
-    
-      // case RESET_STORE:
-      //   return INITIAL_STATE;
 
     default:
       return state;

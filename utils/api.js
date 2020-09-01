@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native';
 import { decks } from './_Data'
 
-const DECKS_STORAGE_KEY = 'Flash:Decks';
+const DECKS_STORAGE_KEY = 'FlashCards:LocalStorage';
 
 export function allData() {
   return decks;
@@ -76,14 +76,14 @@ export async function removeDeckFromStorage(deckId) {
   await AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decks));
 }
 
-export async function addCardToDeckAS(title, card) {
+export async function addCardToDeckAS(id, card) {
   try {
-    const deck = await getDeck(title);
-    const id = title.replace(/\s/g, '');
+    const deck = await getDeck(id);
+    // const id = title.replace(/\s/g, '');
     await AsyncStorage.mergeItem(
       DECKS_STORAGE_KEY,
       JSON.stringify({
-        [title]: {
+        [id]: {
           questions: [...deck.questions].concat(card)
         }
       })

@@ -61,7 +61,8 @@ class AddDeck extends Component {
       });
       return;
     }
-    addDeck(title);
+   
+    // addDeck(title);
     saveDeckTitleAS(title);
 
     const resetAction = StackActions.reset({
