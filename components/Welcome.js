@@ -20,7 +20,6 @@ class Welcome extends Component {
 
   renderGridItem = (itemData) => {
 
-    const title = itemData.item.title
     return (
       
       <DeckGrid
@@ -39,7 +38,7 @@ class Welcome extends Component {
   };
 
   render() {
-    const { decks, navigation, title } = this.props;
+    const { decks } = this.props;
    
     const decksList =  Object.keys(decks)
                       .map((key) => decks[key])

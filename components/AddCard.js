@@ -1,26 +1,19 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 
 import {
   Text,
   View,
-  StyleSheet,
   TextInput,
   TouchableOpacity,
 } from "react-native";
 import Styles from "../utils/globalStyles";
-import { textColor } from "../utils/colors";
 import { connect } from "react-redux";
 
 import { addCardToDeck } from "../actions/index";
 import { addCardToDeckAS } from "../utils/api";
 
 class AddCard extends Component {
-  // static propTypes = {
-  //   navigation: PropTypes.object.isRequired,
-  //   id: PropTypes.string.isRequired,
-  //   addCardToDeck: PropTypes.func.isRequired,
-  // };
+
   state = {
     question: "",
     answer: "",
@@ -66,8 +59,6 @@ class AddCard extends Component {
       answer: this.state.answer,
     }
 
-    // console("Add Card: ", id, card)
-
     addCardToDeck(id, card);
     addCardToDeckAS(id, card);
     this.setState({ question: "", answer: "" });
@@ -83,7 +74,7 @@ class AddCard extends Component {
   };
 
   render() {
-    // console.log("Add Card:", this.props.navigation.getParam('id'))
+
     return (
       <View style={{ flex: 1 }}>
         <View style={Styles.addContainer}>
@@ -130,16 +121,6 @@ class AddCard extends Component {
   }
 }
 
-
-// const mapStateToProps = (decks, state, { navigation }) => {
-//   const { id } = navigation.state.params;
- 
-//   return {
-//     id,
-//     state,
-//     decks
-//   };
-// };
 
 const mapStateToProps = state => ({ decks: state});
 

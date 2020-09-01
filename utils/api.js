@@ -1,14 +1,10 @@
 import { AsyncStorage } from 'react-native';
 import { decks } from './_Data'
 
-const DECKS_STORAGE_KEY = 'FlashCards:LocalStorage';
+const DECKS_STORAGE_KEY = 'FlashCards:StorageDB';
 
 export function allData() {
   return decks;
-}
-
-function formatDeckResults(results) {
-  return results === null ? decks : JSON.parse(results);
 }
 
 export async function fetchAllDecks() {

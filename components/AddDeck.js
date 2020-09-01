@@ -4,17 +4,13 @@ import { connect } from "react-redux";
 import {
   Text,
   View,
-  StyleSheet,
   TextInput,
   TouchableOpacity,
 } from "react-native";
 import styles from "../utils/globalStyles";
-import { textColor } from "../utils/colors";
-// import CustomStatusBar from '../components/CustomStatusBar';
 import { addDeck } from "../actions";
 import { saveDeckTitleAS } from "../utils/api";
 import { StackActions, NavigationActions } from "react-navigation";
-import Indicator from "./Indicator";
 
 class AddDeck extends Component {
   static propTypes = {
@@ -62,7 +58,7 @@ class AddDeck extends Component {
       return;
     }
    
-    // addDeck(title);
+    addDeck(title);
     saveDeckTitleAS(title);
 
     const resetAction = StackActions.reset({

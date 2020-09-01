@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import Styles from '../utils/globalStyles';
-// import { robotoMedium, robotoRegular } from '../utils/fonts';
-import { textColor, white } from '../utils/colors';
+
 
 class Question extends Component {
 

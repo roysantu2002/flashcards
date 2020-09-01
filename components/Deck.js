@@ -81,9 +81,7 @@ class Deck extends Component {
 
   render() {
 
-    const { deck, decks, id } = this.props;
-    const { showNoQuestionsError } = this.props;
-    const {title} = this.props
+    const { decks, id } = this.props;
     let questionsCount = ""
     try{
         questionsCount = decks[id].questions.length

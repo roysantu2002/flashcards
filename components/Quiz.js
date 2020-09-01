@@ -6,7 +6,6 @@ import Question from '../components/Question';
 import QuizResults from '../components/QuizResults';
 import { setLocalNotification, clearLocalNotification } from '../utils/helpers';
 
-
 class Quiz extends Component {
 
   state = {
@@ -71,7 +70,7 @@ class Quiz extends Component {
 }
 
 function mapStateToProps(decks, { navigation }) {
-  const { id, questions } = navigation.state.params;
+  const { id } = navigation.state.params;
 
   return {
     id,

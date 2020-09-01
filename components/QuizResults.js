@@ -1,13 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {Text, TouchableOpacity, View } from 'react-native';
 import Styles from '../utils/globalStyles';
 
 function QuizResults(props) {
 
   const { totalQuestions, questionsAnsweredCorrectly, onStartQuizAgain } = props;
   const percentage = Math.round((100 / totalQuestions) * questionsAnsweredCorrectly);
-  {console.log(props)}
+
   return (
     <View>
       <Text style={Styles.title}>Quiz Complete</Text>
